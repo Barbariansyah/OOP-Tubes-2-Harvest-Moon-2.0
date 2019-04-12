@@ -1,7 +1,7 @@
 
 /**
  * Base class Product.
- * Memiliki atribut price yang dimiliki semua product turunan
+ * Memiliki atribut price dan name yang dimiliki semua product turunan
  */
 public class Product{
     protected double price;
@@ -45,6 +45,7 @@ public class Product{
     /**
      * Implementasi method equals
      * Digunakan untuk membandingkan product this dengan p
+     * @return boolean kesamaan product
      */
     public boolean equals(Product p){
         if(p == null){
