@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * LinkedList
@@ -16,8 +16,8 @@ public class LinkedList<T> implements Iterable{
     public LinkedList(LinkedList<T> original) {
         n = original.n;
         list = new ArrayList<T>();
-        for (T el : original) {
-            list.add(el);
+        for(int i = 0; i < n; i++){
+            list.add(original.get(i));
         }
     }
     public Iterator<T> iterator() {
@@ -29,8 +29,10 @@ public class LinkedList<T> implements Iterable{
      * @return index elemen, -1 jika tidak ada
      */
     public int find(T element) {
+                
         if (n > 0){
             for (int i = 0; i < n; i++) {
+                
                 if (list.get(i).equals(element)){
                     return i;
                 }
@@ -65,6 +67,7 @@ public class LinkedList<T> implements Iterable{
      */
     public void remove(T element){
         list.remove(element);
+        n--;
     }
     /**
      * Mengembalikan elemen pada indeks
@@ -72,11 +75,11 @@ public class LinkedList<T> implements Iterable{
      * @return objek pada index ke-index
      */
     public T get(int index) {
-        if (index != -1 && index < n){
+        //if (index != -1 && index < n){
             return list.get(index);
-        }else{
-            throw Exception();
-        }
+        //}else{
+            //throw Exception();
+        //}
     }
     /**
      * Mengosongkan linked list

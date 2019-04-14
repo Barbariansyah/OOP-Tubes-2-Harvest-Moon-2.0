@@ -13,6 +13,11 @@ public class Main{
         System.out.println("---FarmProduct Test---");
         System.out.println();
 
+        CowMeat cow1 = new CowMeat();
+        CowMeat cow2 = new CowMeat();
+
+        System.out.println("cow == cow ?: "+ cow1.equals(cow2));
+
         FarmProduct d = new FarmProduct(10000, "Chicken Egg");
         d.Print();
 
@@ -52,6 +57,25 @@ public class Main{
         System.out.println();
 
 
+        System.out.println();
+        System.out.println("---SideProduct children Test---");
+        System.out.println();
+        BeefRolade.initRecipe();
+        
+        System.out.println("Beef Rolade Recipe:");
+        for(int it = 0; it < BeefRolade.getRecipe().length(); it++){
+            System.out.println(BeefRolade.getRecipe().get(it).getName());
+        }
+        System.out.println();
+
+        System.out.println();
+        System.out.println("---SideProduct children recipe validation Test---");
+        System.out.println();
+        LinkedList<Product> testInventory = new LinkedList<Product>();
+        testInventory.add(new ChickenEgg());
+        testInventory.add(new CowMilk());
+        System.out.println("Recipe validated: "+ BeefRolade.validateRecipe(testInventory));
 
     }
+
 }

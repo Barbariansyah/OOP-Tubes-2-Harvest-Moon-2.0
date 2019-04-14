@@ -47,16 +47,19 @@ public class Product{
      * Digunakan untuk membandingkan product this dengan p
      * @return boolean kesamaan product
      */
-    public boolean equals(Product p){
+    public boolean equals(Object p){
         if(p == null){
             return false;
         }
-
-        final Product temp = (Product) p;
-
-        if(name != p.getName()){
+        if (! (p instanceof Product)){
             return false;
         }
+        Product temp = (Product) p;
+        
+        if(name != temp.getName()){
+            return false;
+        }
+
         return true;
     }
 }
