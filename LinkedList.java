@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * LinkedList
  */
-public class LinkedList<T> implements Iterable{
+public class LinkedList<T> implements Iterable<T>{
     private int n;
     private ArrayList<T> list;
     /**
@@ -16,10 +17,11 @@ public class LinkedList<T> implements Iterable{
     public LinkedList(LinkedList<T> original) {
         n = original.n;
         list = new ArrayList<T>();
-        for (T el : original) {
-            list.add(el);
+        for (Object el : original) {
+            list.add((T) el);
         }
     }
+    @Override
     public Iterator<T> iterator() {
         return this.list.iterator();
     }
@@ -71,11 +73,11 @@ public class LinkedList<T> implements Iterable{
      * @param index index dari data yang diinginkan
      * @return objek pada index ke-index
      */
-    public T get(int index) {
+    public T get(int index) throws IndexOutOfBoundsException{
         if (index != -1 && index < n){
             return list.get(index);
         }else{
-            throw Exception();
+            throw new IndexOutOfBoundsException();
         }
     }
     /**
