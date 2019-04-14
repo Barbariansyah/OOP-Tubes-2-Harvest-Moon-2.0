@@ -67,6 +67,7 @@ public class LinkedList<T> implements Iterable<T>{
      */
     public void remove(T element){
         list.remove(element);
+        n--;
     }
     /**
      * Mengembalikan elemen pada indeks
