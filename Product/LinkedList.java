@@ -1,9 +1,14 @@
+<<<<<<< HEAD:Product/LinkedList.java
 import java.util.*;
+=======
+import java.util.ArrayList;
+import java.util.Iterator;
+>>>>>>> f31127f5209b104d68e1cff94d4bcddcaad7307d:LinkedList.java
 
 /**
  * LinkedList
  */
-public class LinkedList<T> implements Iterable{
+public class LinkedList<T> implements Iterable<T>{
     private int n;
     private ArrayList<T> list;
     /**
@@ -16,10 +21,11 @@ public class LinkedList<T> implements Iterable{
     public LinkedList(LinkedList<T> original) {
         n = original.n;
         list = new ArrayList<T>();
-        for(int i = 0; i < n; i++){
-            list.add(original.get(i));
+        for (Object el : original) {
+            list.add((T) el);
         }
     }
+    @Override
     public Iterator<T> iterator() {
         return this.list.iterator();
     }
@@ -74,12 +80,21 @@ public class LinkedList<T> implements Iterable{
      * @param index index dari data yang diinginkan
      * @return objek pada index ke-index
      */
+<<<<<<< HEAD:Product/LinkedList.java
     public T get(int index) {
         //if (index != -1 && index < n){
             return list.get(index);
         //}else{
             //throw Exception();
         //}
+=======
+    public T get(int index) throws IndexOutOfBoundsException{
+        if (index != -1 && index < n){
+            return list.get(index);
+        }else{
+            throw new IndexOutOfBoundsException();
+        }
+>>>>>>> f31127f5209b104d68e1cff94d4bcddcaad7307d:LinkedList.java
     }
     /**
      * Mengosongkan linked list
