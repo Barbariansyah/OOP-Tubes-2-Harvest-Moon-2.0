@@ -43,7 +43,7 @@ public class Player extends Entity implements LiveEntity, Renderable
         @param _water_container container air awal
         @param _money nilai awal uang
         */
-        public Player(String _name , int _water_container , double _money, int x, int y)
+        private Player(String _name , int _water_container , double _money, int x, int y)
             {
                 this.name = _name;
                 this.water_container = _water_container;
