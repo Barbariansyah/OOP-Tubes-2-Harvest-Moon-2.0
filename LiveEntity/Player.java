@@ -63,9 +63,11 @@ public class Player extends Entity implements LiveEntity, Renderable
                         player_instance = new Player(_name , _water_container , _money, x, y);
                     }
             }
+        
         //! Method static untuk membuat kelas Player
         /*!
         Digunakan untuk membuat objek dari kelas Player
+        @return Player
         */   
         public static Player getInstance() throws IllegalAccessException
             {
