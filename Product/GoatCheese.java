@@ -1,39 +1,38 @@
-
 /**
- * Kelas BeefRolade, kelas riil turunan side product.
- * Terbuat dari cow meat dan chicken egg.
+ * Kelas GoatCheese, kelas riil turunan side product.
+ * Terbuat dari dua goat milk
  */
-public class BeefRolade extends SideProduct{
+public class GoatCheese extends SideProduct{
     private static LinkedList<Product> recipe = new LinkedList<Product>();
     /**
      * initRecipe.
      * Melakukan inisiasi resep
      */
     public static void initRecipe(){
-        CowMeat a = new CowMeat();
-        ChickenEgg b = new ChickenEgg();
+        GoatMilk a = new GoatMilk();
+        GoatMilk b = new GoatMilk();
         recipe.add(a);
         recipe.add(b);
     }
-    /**
-     * Konstruktor BeefRolade.
+     /**
+     * Konstruktor GoatCheese.
      * Harus Melakukan pemanggilan validasi resep sebelum pembuatan objek
      */
-    public BeefRolade(){
-        super(80000,"Beef Rolade");
+    public GoatCheese(){
+        super(50000,"Goat Cheese");
     }
-    /**
+     /**
      * getRecipe.
      * Melakukan pengembalian recipe
      */
     public static LinkedList<Product> getRecipe(){
         return recipe;
     }
-    /**
-     * validateRecipe.
-     * Melakukan validasi resep
-     */
-    public static boolean  validateRecipe(LinkedList<Product> inventory){
+     /**
+      * validateRecipe.
+      * Melakukan validasi resep
+      */
+      public static boolean  validateRecipe(LinkedList<Product> inventory){
 
         LinkedList<Product> temp = new LinkedList<Product>(inventory);
         LinkedList<Product> tempRecipe = new LinkedList<Product>(recipe);
@@ -49,5 +48,5 @@ public class BeefRolade extends SideProduct{
             }
         }
         return true;
-    }
+    }  
 }

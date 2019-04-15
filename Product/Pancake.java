@@ -1,26 +1,25 @@
-
 /**
- * Kelas BeefRolade, kelas riil turunan side product.
- * Terbuat dari cow meat dan chicken egg.
+ * Kelas Pancake, kelas riil turunan side product.
+ * Terbuat dari chicken egg dan cow milk
  */
-public class BeefRolade extends SideProduct{
-    private static LinkedList<Product> recipe = new LinkedList<Product>();
+public class Pancake extends SideProduct{
+    private static LinkedList<Product> recipe = new LinkedList<Product>();   
     /**
      * initRecipe.
      * Melakukan inisiasi resep
      */
     public static void initRecipe(){
-        CowMeat a = new CowMeat();
+        CowMilk a = new CowMilk();
         ChickenEgg b = new ChickenEgg();
         recipe.add(a);
         recipe.add(b);
     }
     /**
-     * Konstruktor BeefRolade.
+     * Konstruktor pancake.
      * Harus Melakukan pemanggilan validasi resep sebelum pembuatan objek
      */
-    public BeefRolade(){
-        super(80000,"Beef Rolade");
+    public Pancake(){
+        super(40000,"Pancake");
     }
     /**
      * getRecipe.

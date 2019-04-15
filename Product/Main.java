@@ -61,6 +61,9 @@ public class Main{
         System.out.println("---SideProduct children Test---");
         System.out.println();
         BeefRolade.initRecipe();
+        ChickenButterMilk.initRecipe();
+        Pancake.initRecipe();
+        GoatCheese.initRecipe();
         
         System.out.println("Beef Rolade Recipe:");
         for(int it = 0; it < BeefRolade.getRecipe().length(); it++){
@@ -71,11 +74,53 @@ public class Main{
         System.out.println();
         System.out.println("---SideProduct children recipe validation Test---");
         System.out.println();
-        LinkedList<Product> testInventory = new LinkedList<Product>();
-        testInventory.add(new ChickenEgg());
-        testInventory.add(new CowMilk());
-        System.out.println("Recipe validated: "+ BeefRolade.validateRecipe(testInventory));
+        System.out.println("---All value below should be true---");
+        System.out.println();
 
+        LinkedList<Product> testInventory1 = new LinkedList<Product>();
+        testInventory1.add(new ChickenEgg());
+        testInventory1.add(new CowMeat());
+        System.out.println("Recipe validated: "+ BeefRolade.validateRecipe(testInventory1));
+        
+        LinkedList<Product> testInventory2 = new LinkedList<Product>();
+        testInventory2.add(new ChickenMeat());
+        testInventory2.add(new CowMilk());
+        System.out.println("Recipe validated: "+ ChickenButterMilk.validateRecipe(testInventory2));
+
+        LinkedList<Product> testInventory3 = new LinkedList<Product>();
+        testInventory3.add(new ChickenEgg());
+        testInventory3.add(new CowMilk());
+        System.out.println("Recipe validated: "+ Pancake.validateRecipe(testInventory3));
+
+        LinkedList<Product> testInventory4 = new LinkedList<Product>();
+        testInventory4.add(new GoatMilk());
+        testInventory4.add(new GoatMilk());
+        System.out.println("Recipe validated: "+ GoatCheese.validateRecipe(testInventory4));
+
+        System.out.println();
+        System.out.println("---All value below should be false---");
+        System.out.println();
+
+        LinkedList<Product> testInventory5 = new LinkedList<Product>();
+        testInventory5.add(new ChickenEgg());
+        testInventory5.add(new CowMilk());
+        testInventory5.add(new CowMilk());
+        System.out.println("Recipe validated: "+ BeefRolade.validateRecipe(testInventory5));
+        
+        LinkedList<Product> testInventory6 = new LinkedList<Product>();
+        testInventory6.add(new ChickenMeat());
+        System.out.println("Recipe validated: "+ ChickenButterMilk.validateRecipe(testInventory6));
+
+        LinkedList<Product> testInventory7 = new LinkedList<Product>();
+        testInventory7.add(new ChickenEgg());
+        System.out.println("Recipe validated: "+ Pancake.validateRecipe(testInventory7));
+
+        LinkedList<Product> testInventory8 = new LinkedList<Product>();
+        testInventory8.add(new GoatMilk());
+        System.out.println("Recipe validated: "+ GoatCheese.validateRecipe(testInventory8));
+
+        System.out.println();
+        System.out.println("---END OF TEST---");
     }
 
 }
