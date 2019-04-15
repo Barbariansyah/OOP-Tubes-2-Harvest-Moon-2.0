@@ -13,7 +13,7 @@ public class Player extends Entity implements LiveEntity, Renderable
         private String name;
         private int water_container;
         private double money;
-        //LinkedList<Product> inventory;
+        LinkedList<Product> inventory;
 
         // Method
 
@@ -228,7 +228,10 @@ public class Player extends Entity implements LiveEntity, Renderable
         */
         public void PrintInventory()
             {
-
+                for (int i = 0 ; i < inventory.length() ;i++)
+                    {
+                        System.out.println(inventory.get(i));
+                    }
             }
         
         //! Implementasi dari fungsi PrintStatus()
@@ -248,5 +251,8 @@ public class Player extends Entity implements LiveEntity, Renderable
         Digunakan untuk mendapatkan inventory dari pengguna
         @return inventory
         */
-        //LinkedList<Product*>& GetInventory();        
+        LinkedList<Product> GetInventory()
+            {
+                return inventory;
+            }
     }
