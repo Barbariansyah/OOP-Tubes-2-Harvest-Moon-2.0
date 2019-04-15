@@ -16,11 +16,18 @@ public class Player extends Entity implements LiveEntity, Renderable
         //LinkedList<Product> inventory;
 
         // Method
+
+        //! Static variable untuk type Player
+        /*!
+        Digunakan untuk membuat objek singleton dari kelas ini
+        */
+        private static Player player_instance = null;
+
         //! Konstruktor default Player()
         /*!
         Digunakan untuk membuat objek dari kelas ini
         */
-        public Player()
+        private Player()
             {
                 this.name = "Player";
                 this.water_container = 0;
@@ -43,6 +50,33 @@ public class Player extends Entity implements LiveEntity, Renderable
                 this.money = _money;
                 pos_x = x;
                 pos_y = y;
+            }
+        
+        //! Inisialisasi untuk membuat konstruktor Player
+        /*!
+        Digunakan untuk membuat objek dari kelas Player
+        */ 
+        public static void initialize(String _name , int _water_container , double _money, int x, int y)
+            {
+                if (player_instance == null)
+                    {
+                        player_instance = new Player(_name , _water_container , _money, x, y);
+                    }
+            }
+        //! Method static untuk membuat kelas Player
+        /*!
+        Digunakan untuk membuat objek dari kelas Player
+        */   
+        public static Player getInstance() throws IllegalAccessException
+            {
+                if (player_instance != null)
+                    {
+                        return player_instance;
+                    }
+                else
+                    {
+                        throw new IllegalAccessException("Player not initialized");
+                    }
             }
 
         //! Fungsi setter nama
