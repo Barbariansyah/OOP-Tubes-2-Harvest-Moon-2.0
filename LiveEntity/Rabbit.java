@@ -51,9 +51,9 @@ public class Rabbit extends FarmAnimal implements Renderable
         /*!
         Getter untuk mendapatkan product dari kelas Rabbit, akan menghasilkan throws error karena rabbit tidak memiliki product
         */
-        public void GetProduct()
+        public void GetProduct() throws IllegalAccessException
             {
-                throw new IllegalArgumentException("Can't be interracted");
+                throw new IllegalAccessException("Can't be interracted");
             }
 
         //! Implementasi dari fungsi getKilledProduct()

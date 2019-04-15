@@ -87,7 +87,7 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
         Getter untuk mendapatkan product dari hewan yang tidak dibunuh
         @return product dari tiap hewan
         */
-        public abstract void GetProduct();
+        public abstract void GetProduct() throws IllegalAccessException;
 
         //! Fungsi Getter GetKilledProduct()
         /*!

@@ -13,14 +13,21 @@ public class Player extends Entity implements LiveEntity, Renderable
         private String name;
         private int water_container;
         private double money;
-        //LinkedList<Product> inventory;
+        LinkedList<Product> inventory;
 
         // Method
+
+        //! Static variable untuk type Player
+        /*!
+        Digunakan untuk membuat objek singleton dari kelas ini
+        */
+        private static Player player_instance = null;
+
         //! Konstruktor default Player()
         /*!
         Digunakan untuk membuat objek dari kelas ini
         */
-        public Player()
+        private Player()
             {
                 this.name = "Player";
                 this.water_container = 0;
@@ -36,13 +43,42 @@ public class Player extends Entity implements LiveEntity, Renderable
         @param _water_container container air awal
         @param _money nilai awal uang
         */
-        public Player(String _name , int _water_container , double _money, int x, int y)
+        private Player(String _name , int _water_container , double _money, int x, int y)
             {
                 this.name = _name;
                 this.water_container = _water_container;
                 this.money = _money;
                 pos_x = x;
                 pos_y = y;
+            }
+        
+        //! Inisialisasi untuk membuat konstruktor Player
+        /*!
+        Digunakan untuk membuat objek dari kelas Player
+        */ 
+        public static void initialize(String _name , int _water_container , double _money, int x, int y)
+            {
+                if (player_instance == null)
+                    {
+                        player_instance = new Player(_name , _water_container , _money, x, y);
+                    }
+            }
+        
+        //! Method static untuk membuat kelas Player
+        /*!
+        Digunakan untuk membuat objek dari kelas Player
+        @return Player
+        */   
+        public static Player getInstance() throws IllegalAccessException
+            {
+                if (player_instance != null)
+                    {
+                        return player_instance;
+                    }
+                else
+                    {
+                        throw new IllegalAccessException("Player not initialized");
+                    }
             }
 
         //! Fungsi setter nama
@@ -192,7 +228,10 @@ public class Player extends Entity implements LiveEntity, Renderable
         */
         public void PrintInventory()
             {
-
+                for (int i = 0 ; i < inventory.length() ;i++)
+                    {
+                        System.out.println(inventory.get(i));
+                    }
             }
         
         //! Implementasi dari fungsi PrintStatus()
@@ -212,5 +251,8 @@ public class Player extends Entity implements LiveEntity, Renderable
         Digunakan untuk mendapatkan inventory dari pengguna
         @return inventory
         */
-        //LinkedList<Product*>& GetInventory();        
+        LinkedList<Product> GetInventory()
+            {
+                return inventory;
+            }
     }

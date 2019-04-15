@@ -53,7 +53,7 @@ public class Cow extends FarmAnimal implements Renderable
         /*!
         Getter untuk mendapatkan product dari kelas Cow, berupa CowMilk
         */
-        public void GetProduct()
+        public void GetProduct() throws IllegalAccessException
             {
                 if (availableProduct)
                     {
@@ -61,7 +61,7 @@ public class Cow extends FarmAnimal implements Renderable
                     }
                 else
                     {
-                        throw new IllegalArgumentException("Milk not available");
+                        throw new IllegalAccessException("Milk not available");
                     }
             }
 

@@ -52,7 +52,7 @@ public class Chicken extends FarmAnimal implements Renderable
         /*!
         Getter untuk mendapatkan product dari kelas Chicken, berupa ChickenEgg
         */
-        public void GetProduct()
+        public void GetProduct() throws IllegalAccessException
             {
                 if (availableProduct)
                     {
@@ -60,7 +60,7 @@ public class Chicken extends FarmAnimal implements Renderable
                     }
                 else
                     {
-                        throw new IllegalArgumentException("Egg not available");
+                        throw new IllegalAccessException("Egg not available");
                     }
             }
 
