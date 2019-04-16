@@ -5,7 +5,7 @@
    Berisi konstruktor default dan user defined, setter dan getter, serta method-method untuk berinteraksi pada game
 */
 
-import java.util.*;
+import java.util.*; 
 
 public class Player extends Entity implements LiveEntity, Renderable
     {

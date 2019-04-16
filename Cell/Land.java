@@ -1,4 +1,4 @@
-public class Land extends Cell{
+public class Land{
     protected boolean grass;
     protected String type;
 
