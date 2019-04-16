@@ -2,25 +2,26 @@ import java.util.Scanner;
 
 /**
  * Kelas Statik Game.
- * Sebuah kelas static (TODO) yang menyimpan state dari game dan
+ * Sebuah kelas static yang menyimpan state dari game dan
  * method yang digunakan untuk interaksi antar objek pada Engi's Farm
  */
 public static class Game {
-    private Land[][] landmap;            
-    private Entity[][] entitymap;        
-    private LinkedList<FarmAnimal> animals; 
-    private Truck truck;
-    private Well well;
-    private Mixer mixer;
-    private Player player;
-    private int nBaris,nKolom;
+    private static Land[][] landmap;            
+    private static Entity[][] entitymap;        
+    private static LinkedList<FarmAnimal> animals; 
+    private static int nBaris,nKolom;
+    //TODO : Hapus setelah implementasi singleton
+    private static Truck truck;
+    private static Well well;
+    private static Mixer mixer;
+    private static Player player;
 
     /**
      * Initialize Game.
      * Menerima nama file untuk kemudian dibaca dan dimuat dalam struktur data game.
      * @param filename nama file eksternal untuk dibaca
      */
-    public void Initialize(string filename, int xsize, int ysize){
+    public static void Initialize(string filename, int xsize, int ysize){
         nBaris = xsize;
         nKolom = ysize;
 
@@ -38,14 +39,14 @@ public static class Game {
      * Membaca kondisi permainan dan memuatnya dalam memori.
      * @param filename nama file eksternal untuk dibaca
      */
-    public void LoadGame(string filename){
+    public static void LoadGame(string filename){
         // TODO
     }
     /**
      * Method save game untuk menyimpan kondisi permainan ke file eksternal.
      * @param filename nama file eksternal yang akan diisi kondisi permainan
      */
-    public void SaveGame(string filename){
+    public static void SaveGame(string filename){
         //TODO
     }
     /**
@@ -53,7 +54,7 @@ public static class Game {
      * Method ini akan memanggil semua method pada elemen map maupun entities yang
      * berhubungan dengan game tick.
      */
-    public void Tick(){
+    public static void Tick(){
         //Menerima input command
         Scanner scanner = new java.util.Scanner(System.in);
         System.out.print("> ");
@@ -94,7 +95,7 @@ public static class Game {
      * Method ini memanfaatkan method virtual render dari kelas renderer yang
      * diturunkan pada semua kelas selain produk.
      */
-    public void DrawScreen(){
+    public static void DrawScreen(){
         for(int i = 0; i < nBaris; i++){
             for(int j = 0; j < nKolom; j++){
                 if (entitymap[i][j] != null){
@@ -113,7 +114,7 @@ public static class Game {
      * @param y posisi y land, dimulai dari 0, harus selalu valid
      * @return objek land pada posisi x, y
      */
-    public Land getLand(int x, int y){
+    public static Land getLand(int x, int y){
         return landmap[x][y];
     }
     /**
@@ -122,7 +123,7 @@ public static class Game {
      * @param y , dimulai dari 0
      * @return apakah posisi x, y valid
      */
-    public boolean isValidPosition(int x, int y){
+    public static boolean isValidPosition(int x, int y){
         return (x >= 0 && y >= 0 && x < nBaris && y < nKolom);
     }
     /**
@@ -131,7 +132,7 @@ public static class Game {
      * @param y posisi y untuk ditentukan apakah terdapat entity, dimulai dari 0
      * @return apakah posisi x,y terdapat entity
      */
-    public boolean isValidEntity(int x, int y){
+    public static boolean isValidEntity(int x, int y){
         return entitymap[x][y] != null;
     }
     /**
@@ -140,7 +141,7 @@ public static class Game {
      * @param y posisi y entity, dimulai dari 0, harus selalu dalam ukuran map
      * @return objek entity pada posisi x, y. Null jika tidak ada
      */
-    public Entity getEntity(int x, int y){
+    public static Entity getEntity(int x, int y){
         return entitymap[x][y];
     }
     /**
@@ -150,11 +151,11 @@ public static class Game {
      * @param E pointer entity, nullptr jika tidak ada
      * @return objek entity pada posisi x, y
      */
-    public void setEntity(int x, int y, Entity E){
+    public static void setEntity(int x, int y, Entity E){
         entitymap[x][y] = E;
     }
 
-    public boolean isAdjacent(int x1, int y1, int x2, int y2){
+    public static boolean isAdjacent(int x1, int y1, int x2, int y2){
         return ((x2 == x1+1 || x2 == x1-1) && y2 == y1) || ((y2 == y1+1 || y2 == y1-1) && x2 == x1);
     }
     /**
@@ -163,7 +164,7 @@ public static class Game {
      * @param y posisi y farmanimal, dimulai dari 0
      * @return objek farmanimal pada posisi x, y. Null jika tidak ada
      */
-    public FarmAnimal getAnimal(int x, int y){
+    public static FarmAnimal getAnimal(int x, int y){
         for(int i = 0; i < animals.length(); i++){
             if (animals.get(i).GetX() == x && animals.get(i).GetY() == y){
                 return animals.get(i);
@@ -172,7 +173,7 @@ public static class Game {
         throw Exception("No animal at the desired location");
     }
 
-    //TODO : Ubah jadi singleton biar lebih gampang get instancenya
+    //TODO : Hilangkan, dengan implementasi singleton maka tidak diperlukan lagi
 
     /**
      * Method untuk mengakses instans truck jika berada di dekat posisi x,y.
@@ -180,7 +181,7 @@ public static class Game {
      * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat truck
      * @return objek truck pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
      */
-    public Truck getTruck(int x, int y){
+    public static Truck getTruck(int x, int y){
         if (isAdjacent(x,y,truck.GetX(),truck.GetY()))
             return truck;
         else
@@ -192,7 +193,7 @@ public static class Game {
      * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat well
      * @return objek well pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
      */
-    public Well getWell(int x, int y){
+    public static Well getWell(int x, int y){
         if (isAdjacent(x,y,well.GetX(),well.GetY()))
             return well;
         else
@@ -204,7 +205,7 @@ public static class Game {
      * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat mixer
      * @return objek mixer pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
      */
-    public Mixer getMixer(int x, int y){
+    public static Mixer getMixer(int x, int y){
         if (isAdjacent(x,y,mixer.GetX(),mixer.GetY()))
             return mixer;
         else
@@ -214,7 +215,7 @@ public static class Game {
      * Method untuk mengakses instans player
      * @return objek player
      */
-    public Player getPlayer(){
+    public static Player getPlayer(){
         return player;
     }
 
