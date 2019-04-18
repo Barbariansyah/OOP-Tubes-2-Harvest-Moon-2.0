@@ -1,7 +1,5 @@
-import sun.security.jca.GetInstance;
-
 public class Truck extends Facility implements Renderable{
-    private static Well truckInstance = null;
+    private static Truck truckInstance = null;
     private int awayCounter;
 
     private Truck(int _x, int _y){
@@ -11,8 +9,8 @@ public class Truck extends Facility implements Renderable{
     }
     
     public static Truck getInstance() throws IllegalAccessException{
-        if (wellInstance != null){
-            return wellInstance;
+        if (truckInstance != null){
+            return truckInstance;
         }
         else{
             throw new IllegalAccessException("Well not initialized");

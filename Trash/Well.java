@@ -1,5 +1,3 @@
-import sun.security.jca.GetInstance;
-
 public class Well extends Facility implements Renderable{
     private static Well wellInstance = null;
 

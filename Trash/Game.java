@@ -5,7 +5,7 @@ import java.util.Scanner;
  * Sebuah kelas static yang menyimpan state dari game dan
  * method yang digunakan untuk interaksi antar objek pada Engi's Farm
  */
-public static class Game {
+public class Game {
     private static Land[][] landmap;            
     private static Entity[][] entitymap;        
     private static LinkedList<FarmAnimal> animals; 
@@ -21,7 +21,7 @@ public static class Game {
      * Menerima nama file untuk kemudian dibaca dan dimuat dalam struktur data game.
      * @param filename nama file eksternal untuk dibaca
      */
-    public static void Initialize(string filename, int xsize, int ysize){
+    public static void Initialize(String filename, int xsize, int ysize){
         nBaris = xsize;
         nKolom = ysize;
 
@@ -39,14 +39,14 @@ public static class Game {
      * Membaca kondisi permainan dan memuatnya dalam memori.
      * @param filename nama file eksternal untuk dibaca
      */
-    public static void LoadGame(string filename){
+    public static void LoadGame(String filename){
         // TODO
     }
     /**
      * Method save game untuk menyimpan kondisi permainan ke file eksternal.
      * @param filename nama file eksternal yang akan diisi kondisi permainan
      */
-    public static void SaveGame(string filename){
+    public static void SaveGame(String filename){
         //TODO
     }
     /**
@@ -88,7 +88,7 @@ public static class Game {
         }
 
         //Mengubah away counter truck
-        truck.TickTruck();
+        truck.tickTruck();
     }
     /**
      * Method draw screen mencetak kondisi permainan.
@@ -170,7 +170,7 @@ public static class Game {
                 return animals.get(i);
             }
         }
-        throw Exception("No animal at the desired location");
+        throw new Exception("No animal at the desired location");
     }
 
     //TODO : Hilangkan, dengan implementasi singleton maka tidak diperlukan lagi
@@ -185,7 +185,7 @@ public static class Game {
         if (isAdjacent(x,y,truck.GetX(),truck.GetY()))
             return truck;
         else
-            throw Exception("Truck is not nearby");
+            throw new Exception("Truck is not nearby");
     }
     /**
      * Method untuk mengakses instans well jika berada di dekat posisi x,y.
@@ -197,7 +197,7 @@ public static class Game {
         if (isAdjacent(x,y,well.GetX(),well.GetY()))
             return well;
         else
-            throw Exception("Well is not nearby");
+            throw new Exception("Well is not nearby");
     }
     /**
      * Method untuk mengakses instans mixer jika berada di dekat posisi x,y.
@@ -209,7 +209,7 @@ public static class Game {
         if (isAdjacent(x,y,mixer.GetX(),mixer.GetY()))
             return mixer;
         else
-            throw Exception("Mixer is not nearby");
+            throw new Exception("Mixer is not nearby");
     }
     /**
      * Method untuk mengakses instans player

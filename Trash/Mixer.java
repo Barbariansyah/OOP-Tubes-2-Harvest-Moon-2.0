@@ -1,5 +1,3 @@
-import sun.security.jca.GetInstance;
-
 public class Mixer extends Facility implements Renderable{
     private static Mixer mixerInstance = null;
 
