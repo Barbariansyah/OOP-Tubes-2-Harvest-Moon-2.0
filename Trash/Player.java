@@ -416,85 +416,90 @@ public class Player extends Entity implements LiveEntity, Renderable
         */
         public void Mix()
             {
-                int x_mixer = Mixer.getInstance().GetX();
-                int y_mixer = Mixer.getInstance().GetY();
+                try {
+                    int x_mixer = Mixer.getInstance().GetX();
+                    int y_mixer = Mixer.getInstance().GetY();
 
-                if (Game.isAdjacent(pos_x, pos_y, x_mixer, y_mixer))
-                    {
-                        System.out.println("What do you want ? ");
-                        System.out.println("1. Beef Rolade");
-                        System.out.println("2. Pancake");
-                        System.out.println("3. Chicken Buttermilk");
-                        System.out.println("4. Goat Cheese");
+                    if (Game.isAdjacent(pos_x, pos_y, x_mixer, y_mixer))
+                        {
+                            System.out.println("What do you want ? ");
+                            System.out.println("1. Beef Rolade");
+                            System.out.println("2. Pancake");
+                            System.out.println("3. Chicken Buttermilk");
+                            System.out.println("4. Goat Cheese");
 
-                        int choice;
-                        Scanner scan = new Scanner(System.in);
+                            int choice;
+                            Scanner scan = new Scanner(System.in);
 
-                        choice = scan.nextInt();
-                        if (choice == 1)
-                            {
-                                if ( BeefRolade.validateRecipe(inventory))
-                                    {
-                                        BeefRolade br = new BeefRolade();
-                                        inventory.add(br);
+                            choice = scan.nextInt();
+                            if (choice == 1)
+                                {
+                                    if ( BeefRolade.validateRecipe(inventory))
+                                        {
+                                            BeefRolade br = new BeefRolade();
+                                            inventory.add(br);
 
-                                        LinkedList<Product> l_p = BeefRolade.getRecipe();
+                                            LinkedList<Product> l_p = BeefRolade.getRecipe();
 
-                                        for (int i = 0 ; i < l_p.length() ; i++)
-                                            {
-                                                inventory.remove(l_p.get(i));
-                                            }
-                                    }
-                            }
-                        else if ( choice == 2)
-                            {
-                                if ( Pancake.validateRecipe(inventory))
-                                    {
-                                        Pancake p = new Pancake();
-                                        inventory.add(p);
+                                            for (int i = 0 ; i < l_p.length() ; i++)
+                                                {
+                                                    inventory.remove(l_p.get(i));
+                                                }
+                                        }
+                                }
+                            else if ( choice == 2)
+                                {
+                                    if ( Pancake.validateRecipe(inventory))
+                                        {
+                                            Pancake p = new Pancake();
+                                            inventory.add(p);
 
-                                        LinkedList<Product> l_p = Pancake.getRecipe();
+                                            LinkedList<Product> l_p = Pancake.getRecipe();
 
-                                        for (int i = 0 ; i < l_p.length() ; i++)
-                                            {
-                                                inventory.remove(l_p.get(i));
-                                            }
-                                    }
+                                            for (int i = 0 ; i < l_p.length() ; i++)
+                                                {
+                                                    inventory.remove(l_p.get(i));
+                                                }
+                                        }
 
-                            }
-                        else if ( choice == 3)
-                            {
-                                if ( ChickenButterMilk.validateRecipe(inventory))
-                                    {
-                                        ChickenButterMilk cbm = new ChickenButterMilk();
-                                        inventory.add(cbm);
+                                }
+                            else if ( choice == 3)
+                                {
+                                    if ( ChickenButterMilk.validateRecipe(inventory))
+                                        {
+                                            ChickenButterMilk cbm = new ChickenButterMilk();
+                                            inventory.add(cbm);
 
-                                        LinkedList<Product> l_p = ChickenButterMilk.getRecipe();
+                                            LinkedList<Product> l_p = ChickenButterMilk.getRecipe();
 
-                                        for (int i = 0 ; i < l_p.length() ; i++)
-                                            {
-                                                inventory.remove(l_p.get(i));
-                                            }
-                                    }
-                            }
-                        else
-                            {
-                                if ( GoatCheese.validateRecipe(inventory))
-                                    {
-                                        GoatCheese gc = new GoatCheese();
-                                        inventory.add(gc);
+                                            for (int i = 0 ; i < l_p.length() ; i++)
+                                                {
+                                                    inventory.remove(l_p.get(i));
+                                                }
+                                        }
+                                }
+                            else
+                                {
+                                    if ( GoatCheese.validateRecipe(inventory))
+                                        {
+                                            GoatCheese gc = new GoatCheese();
+                                            inventory.add(gc);
 
-                                        LinkedList<Product> l_p = GoatCheese.getRecipe();
+                                            LinkedList<Product> l_p = GoatCheese.getRecipe();
 
-                                        for (int i = 0 ; i < l_p.length() ; i++)
-                                            {
-                                                inventory.remove(l_p.get(i));
-                                            }
-                                    }
-                            }
-                        
-                        scan.close();
-                    }
+                                            for (int i = 0 ; i < l_p.length() ; i++)
+                                                {
+                                                    inventory.remove(l_p.get(i));
+                                                }
+                                        }
+                                }
+                            
+                            scan.close();
+                        }
+                } catch (Exception e) {
+
+                }
+                
             }
 
         //! Implementasi dari fungsi PrintInventory()

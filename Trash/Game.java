@@ -56,7 +56,7 @@ public class Game {
      */
     public static void Tick(){
         //Menerima input command
-        Scanner scanner = new java.util.Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.print("> ");
         String cmd = scanner.nextLine();
         if (cmd.equals("MOVE")) {
