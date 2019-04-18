@@ -57,7 +57,7 @@ public class Duck extends FarmAnimal implements Renderable
             {
                 if (availableProduct)
                     {
-
+                        Game.getPlayer().getInventory().add(new DuckEgg());
                     }
                 else
                     {

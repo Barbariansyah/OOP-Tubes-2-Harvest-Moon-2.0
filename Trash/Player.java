@@ -526,7 +526,7 @@ public class Player extends Entity implements LiveEntity, Renderable
         Digunakan untuk mendapatkan inventory dari pengguna
         @return inventory
         */
-        LinkedList<Product> GetInventory()
+        LinkedList<Product> getInventory()
             {
                 return inventory;
             }

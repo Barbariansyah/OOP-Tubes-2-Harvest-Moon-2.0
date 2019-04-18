@@ -54,7 +54,7 @@ public class Goat extends FarmAnimal implements Renderable
         */
         public void GetKilledProduct()
             {
-
+                Game.getPlayer().getInventory().add(new GoatMeat());
             }
 
         //! Implementasi dari fungsi getProduct()
@@ -65,7 +65,7 @@ public class Goat extends FarmAnimal implements Renderable
             {
                 if (availableProduct)
                     {
-
+                        Game.getPlayer().getInventory().add(new GoatMilk());
                     }
                 else
                     {

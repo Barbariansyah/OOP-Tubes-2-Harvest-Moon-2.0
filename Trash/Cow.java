@@ -57,7 +57,7 @@ public class Cow extends FarmAnimal implements Renderable
             {
                 if (availableProduct)
                     {
-
+                        Game.getPlayer().getInventory().add(new CowMilk());
                     }
                 else
                     {
@@ -71,6 +71,6 @@ public class Cow extends FarmAnimal implements Renderable
         */
         public void GetKilledProduct()
             {
-                
+                Game.getPlayer().getInventory().add(new CowMeat());
             }
     }

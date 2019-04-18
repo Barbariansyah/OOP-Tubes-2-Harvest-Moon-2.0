@@ -58,7 +58,7 @@ public class Dino extends FarmAnimal implements Renderable
             {
                 if (availableProduct)
                     {
-                    
+                        Game.getPlayer().getInventory().add(new DinoEgg());
                     }
                 else
                     {

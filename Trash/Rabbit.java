@@ -62,6 +62,6 @@ public class Rabbit extends FarmAnimal implements Renderable
         */
         public void GetKilledProduct()
             {
-
+                Game.getPlayer().getInventory().add(new RabbitMeat());
             }
     }

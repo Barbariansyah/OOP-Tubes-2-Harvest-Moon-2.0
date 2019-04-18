@@ -66,19 +66,31 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
 
                 if ( x == 0 )
                     {
-                        pos_x = pos_x - 1;
+                        if(Game.isValidPosition(pos_x-1, pos_y) && Game.getLand(pos_x-1, pos_y).getType() == allowed_tiles)
+                            {
+                                pos_x = pos_x - 1;
+                            }
                     }
                 else if ( x == 1 )
                     {
-                        pos_x = pos_x + 1;
+                        if(Game.isValidPosition(pos_x+1, pos_y) && Game.getLand(pos_x+1, pos_y).getType() == allowed_tiles)
+                            {
+                                pos_x = pos_x + 1;
+                            }
                     }
                 else if ( x == 2 )
                     {
-                        pos_y = pos_y - 1;
+                        if(Game.isValidPosition(pos_x, pos_y+1) && Game.getLand(pos_x, pos_y+1).getType() == allowed_tiles)
+                            {
+                                pos_y = pos_y + 1;
+                            }
                     }
                 else if ( x == 3)
                     {
-                        pos_y = pos_y - 1;
+                        if(Game.isValidPosition(pos_x, pos_y-1) && Game.getLand(pos_x, pos_y-1).getType() == allowed_tiles)
+                            {
+                                pos_y = pos_y - 1;
+                            }
                     }
             }
 

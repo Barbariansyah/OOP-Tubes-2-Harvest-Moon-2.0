@@ -56,7 +56,7 @@ public class Chicken extends FarmAnimal implements Renderable
             {
                 if (availableProduct)
                     {
-
+                        Game.getPlayer().getInventory().add(new ChickenEgg());
                     }
                 else
                     {
@@ -70,6 +70,6 @@ public class Chicken extends FarmAnimal implements Renderable
         */
         public void GetKilledProduct()
             {
-                
+                Game.getPlayer().getInventory().add(new ChickenMeat());
             }
     }
