@@ -7,7 +7,7 @@
 
 import java.util.*; 
 
-public class Player extends Entity implements LiveEntity, Renderable
+public class Player extends Entity implements LiveEntity
     {
         // Atribut
         private String name;
