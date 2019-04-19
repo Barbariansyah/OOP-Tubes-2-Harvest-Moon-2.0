@@ -1,52 +1,208 @@
+package viewcontroller;
+
 import java.util.Scanner;
+import java.util.Random;
+import java.io.File;
+
+import entity.*;
+import cell.*;
+import product.*;
+import model.*;
 
 /**
  * Kelas Statik Game.
  * Sebuah kelas static yang menyimpan state dari game dan
  * method yang digunakan untuk interaksi antar objek pada Engi's Farm
  */
-public static class Game {
+public class Game {
     private static Land[][] landmap;            
     private static Entity[][] entitymap;        
     private static LinkedList<FarmAnimal> animals; 
     private static int nBaris,nKolom;
-    //TODO : Hapus setelah implementasi singleton
-    private static Truck truck;
-    private static Well well;
-    private static Mixer mixer;
-    private static Player player;
 
     /**
      * Initialize Game.
      * Menerima nama file untuk kemudian dibaca dan dimuat dalam struktur data game.
      * @param filename nama file eksternal untuk dibaca
      */
-    public static void Initialize(string filename, int xsize, int ysize){
-        nBaris = xsize;
-        nKolom = ysize;
-
-        landmap = new Land[nBaris][nKolom];
-        entitymap = new Entity[nBaris][nKolom];
-
+    public static void initialize(String filename){
+        animals = new LinkedList<FarmAnimal>();
+        
         BeefRolade.initRecipe();
         Pancake.initRecipe();
         GoatCheese.initRecipe();
         ChickenButterMilk.initRecipe();
-        LoadGame(filename);
+
+        if (filename == "none"){
+            //Default initializer
+            nBaris = 5; 
+            nKolom = 5;
+    
+            landmap = new Land[nBaris][nKolom];
+            entitymap = new Entity[nBaris][nKolom];
+
+            Player.initialize("Default", 5, 0, 0, 0);
+            Truck.initialize(0,1);
+            Well.initialize(0,2);
+            Mixer.initialize(0,3);
+
+            for (int i = 0; i < nBaris; i++) {
+                for (int j = 0; j < nKolom; j++) {
+                    landmap[i][j] = new Grassland();
+                    entitymap[i][j] = null;
+                }
+            }
+
+            try{
+                entitymap[0][0] = Player.getInstance();
+                entitymap[0][1] = Truck.getInstance();
+                entitymap[0][2] = Well.getInstance();
+                entitymap[0][3] = Mixer.getInstance();
+            }catch (Exception e){
+    
+            }
+        }else{
+            loadGame(filename);
+        }
     }
     /**
      * Method load game yang akan dipanggil oleh konstruktor.
      * Membaca kondisi permainan dan memuatnya dalam memori.
      * @param filename nama file eksternal untuk dibaca
      */
-    public static void LoadGame(string filename){
-        // TODO
+    public static void loadGame(String filename){
+        Scanner scanner;
+        File file = null;
+        try{
+            file = new File(filename);
+            scanner = new Scanner(file);
+        } catch (Exception e){
+            scanner = new Scanner(System.in);
+        }
+
+        //Reading map size
+        String cmd;
+        int xsize = 0;
+        int ysize = 0;
+        while (scanner.hasNextLine()){
+            xsize++;
+            cmd = scanner.nextLine();
+            if (ysize == 0){
+                ysize = cmd.length();
+            }
+        }
+
+        nBaris = xsize;
+        nKolom = ysize;
+        landmap = new Land[nBaris][nKolom];
+        entitymap = new Entity[nBaris][nKolom];
+
+        scanner.close();
+
+        try{
+            scanner = new Scanner(file);
+        } catch (Exception e){
+            scanner = new Scanner(System.in);
+        }
+
+        for (int i = 0; i < nBaris; i++) {
+            cmd = scanner.nextLine();
+            for (int j = 0; j < nKolom; j++) {
+                char chr = cmd.charAt(j);
+                if (chr == '-'){
+                    landmap[i][j] = new Grassland();
+                }
+                else if (chr == 'O'){
+                    landmap[i][j] = new Coop();
+                }
+                else if (chr == 'X'){
+                    landmap[i][j] = new Barn();
+                }
+                else if (chr == '#'){
+                    landmap[i][j] = new Grassland();
+                    landmap[i][j].growGrass();
+                }
+                else if (chr == '*'){
+                    landmap[i][j] = new Coop();
+                    landmap[i][j].growGrass();
+                }
+                else if (chr == '@'){
+                    landmap[i][j] = new Barn();
+                    landmap[i][j].growGrass();
+                }
+                else if (chr == 'P'){
+                    try {
+                        Player.initialize("Default", 5, 0, i, j);
+                        landmap[i][j] = new Grassland();
+                        entitymap[i][j] = Player.getInstance();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if (chr == 'M'){
+                    try {
+                        Mixer.initialize(i,j);
+                        landmap[i][j] = new Grassland();
+                        entitymap[i][j] = Mixer.getInstance();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if (chr == 'W'){
+                    try {
+                        Well.initialize(i,j);
+                        landmap[i][j] = new Grassland();
+                        entitymap[i][j] = Well.getInstance();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if (chr == 'T'){
+                    try {
+                        Truck.initialize(i,j);
+                        landmap[i][j] = new Grassland();
+                        entitymap[i][j] = Truck.getInstance();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if (chr == 'C'){
+                    animals.add(new Chicken(i,j));
+                    landmap[i][j] = new Coop();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }
+                else if (chr == 'S'){
+                    animals.add(new Cow(i,j));
+                    landmap[i][j] = new Grassland();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }
+                else if (chr =='U'){
+                    animals.add(new Dino(i,j));
+                    landmap[i][j] = new Coop();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }else if (chr == 'D'){
+                    animals.add(new Duck(i,j));
+                    landmap[i][j] = new Coop();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }else if (chr == 'G'){
+                    animals.add(new Goat(i,j));
+                    landmap[i][j] = new Grassland();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }else if (chr == 'R'){
+                    animals.add(new Rabbit(i,j));
+                    landmap[i][j] = new Barn();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }
+            }
+        }
+
+        scanner.close();
     }
     /**
      * Method save game untuk menyimpan kondisi permainan ke file eksternal.
      * @param filename nama file eksternal yang akan diisi kondisi permainan
      */
-    public static void SaveGame(string filename){
+    public static void saveGame(String filename){
         //TODO
     }
     /**
@@ -54,13 +210,32 @@ public static class Game {
      * Method ini akan memanggil semua method pada elemen map maupun entities yang
      * berhubungan dengan game tick.
      */
-    public static void Tick(){
+    public static void tick() throws IllegalAccessException{
         //Menerima input command
-        Scanner scanner = new java.util.Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.print("> ");
-        String cmd = scanner.nextLine();
-        if (cmd.equals("MOVE")) {
-            player.Move();
+        String cmd;
+        if (scanner.hasNextLine()){
+            cmd = scanner.nextLine();
+        }else{
+            cmd = "";
+        }
+
+        Player player;
+        try{
+            player = Player.getInstance();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            throw new IllegalAccessException("Player belum diinisialisasi");
+        }
+        if (cmd.equals("MOVE UP")) {
+            player.move(0);
+        }else if (cmd.equals("MOVE DOWN")) {
+            player.move(1);
+        }else if (cmd.equals("MOVE LEFT")) {
+            player.move(2);
+        }else if (cmd.equals("MOVE RIGHT")) {
+            player.move(3);
         }else if (cmd.equals("INTERACT")) {
             player.Interact();
         }else if (cmd.equals("GROW")) {
@@ -76,32 +251,38 @@ public static class Game {
         }
 
         //Menggerakan semua animal dan mengupdate kondisinya
-        for(FarmAnimal animal : animals){
-            if (animal.GetHungerCountdown() <= -5){
-                animals.remove(animal);
-                setEntity(animal.GetX(),animal.GetY(),null);
-            }else{
-                animal.ReduceHungerCountdown();
-                animal.Move();
-                animal.Eat();
+        Random rand = new Random();
+        for(int i = animals.length() - 1; i >= 0; i--){
+            int dir = rand.nextInt(4);
+            FarmAnimal animal = animals.get(i);
+            animal.reduceHungerCountdown();
+            animal.move(dir);
+            animal.eat();
+            if (animal.getHungerCountdown() <= -5){
+                setEntity(animal.getX(),animal.getY(),null);
+                removeAnimal(animal);
             }
         }
 
         //Mengubah away counter truck
-        truck.TickTruck();
-    }
+        try{
+            Truck.getInstance().tickTruck();
+        } catch (IllegalAccessException e) {
+            throw new IllegalAccessException("Truck belum diinisialisasi");
+        }
+    }   
     /**
      * Method draw screen mencetak kondisi permainan.
      * Method ini memanfaatkan method virtual render dari kelas renderer yang
      * diturunkan pada semua kelas selain produk.
      */
-    public static void DrawScreen(){
+    public static void drawScreen(){
         for(int i = 0; i < nBaris; i++){
             for(int j = 0; j < nKolom; j++){
-                if (entitymap[i][j] != null){
-                    System.out.print(entitymap[i][j].Render());
+                if (isValidEntity(i,j)){
+                    System.out.print(entitymap[i][j].render());
                 }else{
-                    System.out.print(landmap[i][j].Render());
+                    System.out.print(landmap[i][j].render());
                 }
                 System.out.print(" ");
             }
@@ -164,59 +345,19 @@ public static class Game {
      * @param y posisi y farmanimal, dimulai dari 0
      * @return objek farmanimal pada posisi x, y. Null jika tidak ada
      */
-    public static FarmAnimal getAnimal(int x, int y){
+    public static FarmAnimal getAnimal(int x, int y) throws IllegalAccessException{
         for(int i = 0; i < animals.length(); i++){
-            if (animals.get(i).GetX() == x && animals.get(i).GetY() == y){
+            if (animals.get(i).getX() == x && animals.get(i).getY() == y){
                 return animals.get(i);
             }
         }
-        throw Exception("No animal at the desired location");
-    }
-
-    //TODO : Hilangkan, dengan implementasi singleton maka tidak diperlukan lagi
-
-    /**
-     * Method untuk mengakses instans truck jika berada di dekat posisi x,y.
-     * @param x posisi x akses, digunakan untuk menentukan apakah berada di dekat truck 
-     * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat truck
-     * @return objek truck pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
-     */
-    public static Truck getTruck(int x, int y){
-        if (isAdjacent(x,y,truck.GetX(),truck.GetY()))
-            return truck;
-        else
-            throw Exception("Truck is not nearby");
+        throw new IllegalAccessException("No animal at the desired location");
     }
     /**
-     * Method untuk mengakses instans well jika berada di dekat posisi x,y.
-     * @param x posisi x akses, digunakan untuk menentukan apakah berada di dekat well 
-     * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat well
-     * @return objek well pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
+     * Method untuk menghapus sebuah animal dari animals
+     * @param animal animal yang akan dihapus
      */
-    public static Well getWell(int x, int y){
-        if (isAdjacent(x,y,well.GetX(),well.GetY()))
-            return well;
-        else
-            throw Exception("Well is not nearby");
+    public static void removeAnimal(FarmAnimal animal) {
+        animals.remove(animal);
     }
-    /**
-     * Method untuk mengakses instans mixer jika berada di dekat posisi x,y.
-     * @param x posisi x akses, digunakan untuk menentukan apakah berada di dekat mixer 
-     * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat mixer
-     * @return objek mixer pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
-     */
-    public static Mixer getMixer(int x, int y){
-        if (isAdjacent(x,y,mixer.GetX(),mixer.GetY()))
-            return mixer;
-        else
-            throw Exception("Mixer is not nearby");
-    }
-    /**
-     * Method untuk mengakses instans player
-     * @return objek player
-     */
-    public static Player getPlayer(){
-        return player;
-    }
-
 }

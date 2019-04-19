@@ -1,4 +1,3 @@
-package model;
 import java.util.*;
 
 /**
@@ -76,7 +75,6 @@ public class LinkedList<T> implements Iterable<T>{
      * @param index index dari data yang diinginkan
      * @return objek pada index ke-index
      */
-
     public T get(int index) throws IndexOutOfBoundsException{
         if (index != -1 && index < n){
             return list.get(index);
@@ -84,7 +82,6 @@ public class LinkedList<T> implements Iterable<T>{
             throw new IndexOutOfBoundsException();
         }
     }
-    
     /**
      * Mengosongkan linked list
      */
