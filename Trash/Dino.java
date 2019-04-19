@@ -3,7 +3,7 @@
   Sebuah kelas riil dari FarmAnimal, yaitu kelas dino
   Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
 */
-public class Dino extends FarmAnimal implements Renderable
+public class Dino extends FarmAnimal
     {
         // Atribut
         

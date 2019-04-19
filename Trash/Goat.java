@@ -3,7 +3,7 @@
   Sebuah kelas riil dari FarmAnimal, yaitu kelas goat
   Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
 */
-public class Goat extends FarmAnimal implements Renderable
+public class Goat extends FarmAnimal
     {
         // Atribut
 

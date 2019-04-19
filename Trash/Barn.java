@@ -1,4 +1,4 @@
-public class Barn extends Land implements Renderable{
+public class Barn extends Land{
     public Barn(){
         grass = false;
         type = "Barn";

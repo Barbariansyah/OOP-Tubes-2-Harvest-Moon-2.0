@@ -3,7 +3,7 @@
   Sebuah kelas riil dari FarmAnimal, yaitu kelas duck
   Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
 */
-public class Duck extends FarmAnimal implements Renderable
+public class Duck extends FarmAnimal
     {
         // Atribut
 

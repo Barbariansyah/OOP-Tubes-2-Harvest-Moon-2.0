@@ -3,7 +3,7 @@
   Sebuah kelas riil dari FarmAnimal, yaitu kelas chicken
   Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
 */
-public class Chicken extends FarmAnimal implements Renderable
+public class Chicken extends FarmAnimal
     {
         // Atribut
 

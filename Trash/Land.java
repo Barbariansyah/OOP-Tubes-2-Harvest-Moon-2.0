@@ -1,4 +1,4 @@
-public class Land{
+public abstract class Land implements Renderable{
     protected boolean grass;
     protected String type;
 
@@ -17,4 +17,6 @@ public class Land{
     public String getType(){
         return type;
     }
+
+    public abstract String Render();
 }

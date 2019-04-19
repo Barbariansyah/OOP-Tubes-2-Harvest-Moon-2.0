@@ -3,7 +3,7 @@
     Merupakan Class untuk merepresentasikan entitas yang ada pada permainan ini
     memiliki atribut posisi X dan posisi Y
 */
-public class Entity 
+public abstract class Entity implements Renderable
     {
         // Atribut
         protected int pos_x;
@@ -30,4 +30,11 @@ public class Entity
             {
                 return pos_y;
             }
+
+        /**
+         * Method Render()
+         * Mengembalikan string dari objek tertentu
+         * @return String sesuai objek
+         */
+        public abstract String Render();
     }

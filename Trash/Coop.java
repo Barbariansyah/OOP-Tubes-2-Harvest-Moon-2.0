@@ -1,4 +1,4 @@
-public class Coop extends Land implements Renderable{
+public class Coop extends Land{
     public Coop(){
         grass = false;
         type = "Coop";

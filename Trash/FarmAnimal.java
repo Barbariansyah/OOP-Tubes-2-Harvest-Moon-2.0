@@ -115,4 +115,11 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
             {
                 hunger_countdown = -99;
             }
+        
+        //! Fungsi abstract render
+        /*!
+        Digunakan untuk mengeluarkan character pada map
+        @return sesuai kelas masing-masing
+        */
+        public abstract String Render();
     }

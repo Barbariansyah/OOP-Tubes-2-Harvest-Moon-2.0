@@ -1,3 +1,5 @@
-public class Facility extends Entity{
+public abstract class Facility extends Entity{
+
+    public abstract String Render();
     
 }

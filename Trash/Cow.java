@@ -3,7 +3,7 @@
   Sebuah kelas riil dari FarmAnimal, yaitu kelas cow
   Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
 */
-public class Cow extends FarmAnimal implements Renderable
+public class Cow extends FarmAnimal
     {
         // Atribut
 
