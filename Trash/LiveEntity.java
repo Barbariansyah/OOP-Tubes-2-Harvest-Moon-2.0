@@ -7,5 +7,5 @@
 */
 public interface LiveEntity
     {
-        public void Move();
+        public void Move(int dir);
     }

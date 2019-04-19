@@ -15,13 +15,14 @@ public class Player extends Entity implements LiveEntity
         private double money;
         LinkedList<Product> inventory;
 
-        // Method
-
         //! Static variable untuk type Player
         /*!
         Digunakan untuk membuat objek singleton dari kelas ini
         */
         private static Player player_instance = null;
+        private static int inventory_size = 7;
+        
+        // Method
 
         //! Konstruktor default Player()
         /*!
@@ -146,31 +147,27 @@ public class Player extends Entity implements LiveEntity
                 return "P";
             }
         
-        //! Implementasi dari fungsi Move()
-        /*!
-        Digunakan untuk melakukan perpindahan pada map 
+        /**
+        * Digunakan untuk berpindah secara random
+        * @param dir arah pergerakan, 0 : UP , 1 : DOWN , 2 : LEFT , 3 : RIGHT
         */
-        public void Move()
+        public void Move(int dir)
             {
-                String direction;
-                Scanner scan = new Scanner(System.in);
-
-                direction = scan.nextLine();
                 Game.setEntity(pos_x,pos_y,null);
 
-                if (direction.equals("UP") && Game.isValidPosition(pos_x-1,pos_y) && !Game.isValidEntity(pos_x-1,pos_y))
+                if (dir == 0 && Game.isValidPosition(pos_x-1,pos_y) && !Game.isValidEntity(pos_x-1,pos_y))
                     {
                         pos_x = pos_x - 1;
                     }
-                else if (direction.equals("DOWN") && Game.isValidPosition(pos_x+1, pos_y) && !Game.isValidEntity(pos_x+1, pos_y))
+                else if (dir == 1 && Game.isValidPosition(pos_x+1, pos_y) && !Game.isValidEntity(pos_x+1, pos_y))
                     {
                         pos_x = pos_x + 1;
                     }
-                else if (direction.equals("LEFT") && Game.isValidPosition(pos_x, pos_y-1) && !Game.isValidEntity(pos_x, pos_y-1))
+                else if (dir == 2 && Game.isValidPosition(pos_x, pos_y-1) && !Game.isValidEntity(pos_x, pos_y-1))
                     {
                         pos_y = pos_y - 1;
                     }
-                else if (direction.equals("RIGHT")&& Game.isValidPosition(pos_x, pos_y+1) && !Game.isValidEntity(pos_x, pos_y+1))
+                else if (dir == 3 && Game.isValidPosition(pos_x, pos_y+1) && !Game.isValidEntity(pos_x, pos_y+1))
                     {
                         pos_y = pos_y + 1;
                     }
@@ -337,10 +334,11 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x+1, pos_y);
-                    if (inventory.length() < 7)
+                    if (inventory.length() < inventory_size)
                         {
                             fa.GetKilledProduct();
                             fa.SetKilled();
+                            return;
                         }
                     else
                         {
@@ -352,10 +350,11 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y+1);
-                    if (inventory.length() < 7)
+                    if (inventory.length() < inventory_size)
                         {
                             fa.GetKilledProduct();
                             fa.SetKilled();
+                            return;
                         }
                     else
                         {
@@ -367,10 +366,11 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y-1);
-                    if (inventory.length() < 7)
+                    if (inventory.length() < inventory_size)
                         {
                             fa.GetKilledProduct();
                             fa.SetKilled();
+                            return;
                         }
                     else
                         {
@@ -382,10 +382,11 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x-1, pos_y);
-                    if (inventory.length() < 7)
+                    if (inventory.length() < inventory_size)
                         {
                             fa.GetKilledProduct();
                             fa.SetKilled();
+                            return;
                         }
                     else
                         {

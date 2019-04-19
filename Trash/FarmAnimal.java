@@ -54,44 +54,44 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
                 hunger_countdown = hunger_countdown - 1;
             }        
         
-        //! Fungsi move()
-        /*!
-        Digunakan untuk berpindah secara random
+        /**
+        * Digunakan untuk berpindah secara random
+        * @param dir arah pergerakan, 0 : UP , 1 : DOWN , 2 : LEFT , 3 : RIGHT
         */
-        public void Move()
+        public void Move(int dir)
             {
-                Random rand = new Random();
+                Game.setEntity(pos_x,pos_y,null);
 
-                int x = rand.nextInt(4);
-
-                if ( x == 0 )
+                if ( dir == 0 )
                     {
-                        if(Game.isValidPosition(pos_x-1, pos_y) && Game.getLand(pos_x-1, pos_y).getType() == allowed_tiles)
+                        if(Game.isValidPosition(pos_x-1, pos_y) && Game.getLand(pos_x-1, pos_y).getType() == allowed_tiles && !Game.isValidEntity(pos_x-1, pos_y))
                             {
                                 pos_x = pos_x - 1;
                             }
                     }
-                else if ( x == 1 )
+                else if ( dir == 1 )
                     {
-                        if(Game.isValidPosition(pos_x+1, pos_y) && Game.getLand(pos_x+1, pos_y).getType() == allowed_tiles)
+                        if(Game.isValidPosition(pos_x+1, pos_y) && Game.getLand(pos_x+1, pos_y).getType() == allowed_tiles && !Game.isValidEntity(pos_x+1,pos_y))
                             {
                                 pos_x = pos_x + 1;
                             }
                     }
-                else if ( x == 2 )
+                else if ( dir == 2 )
                     {
-                        if(Game.isValidPosition(pos_x, pos_y+1) && Game.getLand(pos_x, pos_y+1).getType() == allowed_tiles)
-                            {
-                                pos_y = pos_y + 1;
-                            }
-                    }
-                else if ( x == 3)
-                    {
-                        if(Game.isValidPosition(pos_x, pos_y-1) && Game.getLand(pos_x, pos_y-1).getType() == allowed_tiles)
+                        if(Game.isValidPosition(pos_x, pos_y-1) && Game.getLand(pos_x, pos_y-1).getType() == allowed_tiles && !Game.isValidEntity(pos_x, pos_y-1))
                             {
                                 pos_y = pos_y - 1;
                             }
                     }
+                else if ( dir == 3)
+                    {
+                        if(Game.isValidPosition(pos_x, pos_y+1) && Game.getLand(pos_x, pos_y+1).getType() == allowed_tiles && !Game.isValidEntity(pos_x, pos_y+1))
+                            {
+                                pos_y = pos_y + 1;
+                            }
+                    }
+
+                Game.setEntity(pos_x,pos_y,this);
             }
 
         //! Fungsi Getter getProduct()
@@ -114,6 +114,8 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
         public void SetKilled()
             {
                 hunger_countdown = -99;
+                Game.setEntity(pos_x,pos_y,null);
+                Game.removeAnimal(this);
             }
         
         //! Fungsi abstract render

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 import java.io.File;
 
 /**
@@ -125,6 +126,7 @@ public class Game {
                 else if (chr == 'P'){
                     try {
                         Player.initialize("Default", 5, 0, i, j);
+                        landmap[i][j] = new Grassland();
                         entitymap[i][j] = Player.getInstance();
                     } catch (Exception e) {
                         //TODO: handle exception
@@ -133,6 +135,7 @@ public class Game {
                 else if (chr == 'M'){
                     try {
                         Mixer.initialize(i,j);
+                        landmap[i][j] = new Grassland();
                         entitymap[i][j] = Mixer.getInstance();
                     } catch (Exception e) {
                         //TODO: handle exception
@@ -140,7 +143,8 @@ public class Game {
                 }
                 else if (chr == 'W'){
                     try {
-                        Well.initialize(0,2);
+                        Well.initialize(i,j);
+                        landmap[i][j] = new Grassland();
                         entitymap[i][j] = Well.getInstance();
                     } catch (Exception e) {
                         //TODO: handle exception
@@ -149,6 +153,7 @@ public class Game {
                 else if (chr == 'T'){
                     try {
                         Truck.initialize(i,j);
+                        landmap[i][j] = new Grassland();
                         entitymap[i][j] = Truck.getInstance();
                     } catch (Exception e) {
                         //TODO: handle exception
@@ -216,8 +221,14 @@ public class Game {
             // TODO
             throw new IllegalAccessException("Player belum diinisialisasi");
         }
-        if (cmd.equals("MOVE")) {
-            player.Move();
+        if (cmd.equals("MOVE UP")) {
+            player.Move(0);
+        }else if (cmd.equals("MOVE DOWN")) {
+            player.Move(1);
+        }else if (cmd.equals("MOVE LEFT")) {
+            player.Move(2);
+        }else if (cmd.equals("MOVE RIGHT")) {
+            player.Move(3);
         }else if (cmd.equals("INTERACT")) {
             player.Interact();
         }else if (cmd.equals("GROW")) {
@@ -233,13 +244,15 @@ public class Game {
         }
 
         //Menggerakan semua animal dan mengupdate kondisinya
+        Random rand = new Random();
         for(FarmAnimal animal : animals){
             if (animal.GetHungerCountdown() <= -5){
                 animals.remove(animal);
                 setEntity(animal.GetX(),animal.GetY(),null);
             }else{
+                int dir = rand.nextInt(4);
                 animal.ReduceHungerCountdown();
-                animal.Move();
+                animal.Move(dir);
                 animal.Eat();
             }
         }
@@ -250,7 +263,7 @@ public class Game {
         } catch (IllegalAccessException e) {
             throw new IllegalAccessException("Truck belum diinisialisasi");
         }
-    }
+    }   
     /**
      * Method draw screen mencetak kondisi permainan.
      * Method ini memanfaatkan method virtual render dari kelas renderer yang
@@ -332,5 +345,12 @@ public class Game {
             }
         }
         throw new IllegalAccessException("No animal at the desired location");
+    }
+    /**
+     * Method untuk menghapus sebuah animal dari animals
+     * @param animal animal yang akan dihapus
+     */
+    public static void removeAnimal(FarmAnimal animal) {
+        animals.remove(animal);
     }
 }
