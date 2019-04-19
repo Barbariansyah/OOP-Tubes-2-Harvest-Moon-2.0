@@ -156,25 +156,26 @@ public class Player extends Entity implements LiveEntity
                 Scanner scan = new Scanner(System.in);
 
                 direction = scan.nextLine();
+                Game.setEntity(pos_x,pos_y,null);
 
-                if (direction == "UP" && Game.isValidPosition(pos_x-1,pos_y) && !Game.isValidEntity(pos_x-1,pos_y))
+                if (direction.equals("UP") && Game.isValidPosition(pos_x-1,pos_y) && !Game.isValidEntity(pos_x-1,pos_y))
                     {
                         pos_x = pos_x - 1;
                     }
-                else if (direction == "DOWN" && Game.isValidPosition(pos_x+1, pos_y) && !Game.isValidEntity(pos_x+1, pos_y))
+                else if (direction.equals("DOWN") && Game.isValidPosition(pos_x+1, pos_y) && !Game.isValidEntity(pos_x+1, pos_y))
                     {
                         pos_x = pos_x + 1;
                     }
-                else if (direction == "LEFT" && Game.isValidPosition(pos_x, pos_y-1) && !Game.isValidEntity(pos_x, pos_y-1))
+                else if (direction.equals("LEFT") && Game.isValidPosition(pos_x, pos_y-1) && !Game.isValidEntity(pos_x, pos_y-1))
                     {
                         pos_y = pos_y - 1;
                     }
-                else if (direction == "RIGHT" && Game.isValidPosition(pos_x, pos_y+1) && !Game.isValidEntity(pos_x, pos_y+1))
+                else if (direction.equals("RIGHT")&& Game.isValidPosition(pos_x, pos_y+1) && !Game.isValidEntity(pos_x, pos_y+1))
                     {
                         pos_y = pos_y + 1;
                     }
                 
-                scan.close();
+                Game.setEntity(pos_x,pos_y,player_instance);
             }
 
         //! Implementasi dari fungsi Talk()
@@ -288,16 +289,26 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     Truck t = Truck.getInstance();
-                    t.setAwayCounter(5);
-                    double selling = 0;
-                    for (int i = 0 ; i < inventory.length() ; i++)
-                        {
-                            selling = selling + inventory.get(i).getPrice();
+                    try {
+                        if (Game.isAdjacent(pos_x, pos_y, t.GetX(), t.GetY()))  
+                            {
+                                t.setAwayCounter(5);
+                                double selling = 0;
+                                for (int i = 0 ; i < inventory.length() ; i++)
+                                    {
+                                        selling = selling + inventory.get(i).getPrice();
+                                    }
+                                
+                                money = money + selling;
+                                inventory.removeAll();
+                            }
+                        else{
+                            throw new IllegalAccessException("Truck is not nearby");
                         }
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                    }
                     
-                    money = money + selling;
-                    inventory.removeAll();
-                    return;
                 } catch (Exception e) {
                     notfound = true;
                 }
