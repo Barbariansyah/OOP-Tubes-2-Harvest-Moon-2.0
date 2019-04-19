@@ -10,43 +10,62 @@ public class Game {
     private static Entity[][] entitymap;        
     private static LinkedList<FarmAnimal> animals; 
     private static int nBaris,nKolom;
-    //TODO : Hapus setelah implementasi singleton
-    private static Truck truck;
-    private static Well well;
-    private static Mixer mixer;
-    private static Player player;
 
     /**
      * Initialize Game.
      * Menerima nama file untuk kemudian dibaca dan dimuat dalam struktur data game.
      * @param filename nama file eksternal untuk dibaca
      */
-    public static void Initialize(String filename, int xsize, int ysize){
+    public static void initialize(String filename, int xsize, int ysize){
         nBaris = xsize;
         nKolom = ysize;
 
         landmap = new Land[nBaris][nKolom];
         entitymap = new Entity[nBaris][nKolom];
+        animals = new LinkedList<FarmAnimal>();
 
         BeefRolade.initRecipe();
         Pancake.initRecipe();
         GoatCheese.initRecipe();
         ChickenButterMilk.initRecipe();
-        LoadGame(filename);
+
+        //TODO : Implementasi di loadGame
+        Player.initialize("Test", 5, 0, 0, 0);
+        Truck.initialize(0,1);
+        Well.initialize(0,2);
+        Mixer.initialize(0,3);
+
+        for (int i = 0; i < nBaris; i++) {
+            for (int j = 0; j < nKolom; j++) {
+                landmap[i][j] = new Grassland();
+                entitymap[i][j] = null;
+            }
+        }
+
+        try{
+            entitymap[0][0] = Player.getInstance();
+            entitymap[0][1] = Truck.getInstance();
+            entitymap[0][2] = Well.getInstance();
+            entitymap[0][3] = Mixer.getInstance();
+        }catch (Exception e){
+
+        }
+
+        loadGame(filename);
     }
     /**
      * Method load game yang akan dipanggil oleh konstruktor.
      * Membaca kondisi permainan dan memuatnya dalam memori.
      * @param filename nama file eksternal untuk dibaca
      */
-    public static void LoadGame(String filename){
+    public static void loadGame(String filename){
         // TODO
     }
     /**
      * Method save game untuk menyimpan kondisi permainan ke file eksternal.
      * @param filename nama file eksternal yang akan diisi kondisi permainan
      */
-    public static void SaveGame(String filename){
+    public static void saveGame(String filename){
         //TODO
     }
     /**
@@ -54,11 +73,24 @@ public class Game {
      * Method ini akan memanggil semua method pada elemen map maupun entities yang
      * berhubungan dengan game tick.
      */
-    public static void Tick(){
+    public static void tick() throws IllegalAccessException{
         //Menerima input command
         Scanner scanner = new Scanner(System.in);
         System.out.print("> ");
-        String cmd = scanner.nextLine();
+        String cmd;
+        if (scanner.hasNextLine()){
+            cmd = scanner.nextLine();
+        }else{
+            cmd = "";
+        }
+
+        Player player;
+        try{
+            player = Player.getInstance();
+        } catch (IllegalAccessException e) {
+            // TODO
+            throw new IllegalAccessException("Player belum diinisialisasi");
+        }
         if (cmd.equals("MOVE")) {
             player.Move();
         }else if (cmd.equals("INTERACT")) {
@@ -88,14 +120,18 @@ public class Game {
         }
 
         //Mengubah away counter truck
-        truck.tickTruck();
+        try{
+            Truck.getInstance().tickTruck();
+        } catch (IllegalAccessException e) {
+            throw new IllegalAccessException("Truck belum diinisialisasi");
+        }
     }
     /**
      * Method draw screen mencetak kondisi permainan.
      * Method ini memanfaatkan method virtual render dari kelas renderer yang
      * diturunkan pada semua kelas selain produk.
      */
-    public static void DrawScreen(){
+    public static void drawScreen(){
         for(int i = 0; i < nBaris; i++){
             for(int j = 0; j < nKolom; j++){
                 if (entitymap[i][j] != null){
@@ -164,59 +200,12 @@ public class Game {
      * @param y posisi y farmanimal, dimulai dari 0
      * @return objek farmanimal pada posisi x, y. Null jika tidak ada
      */
-    public static FarmAnimal getAnimal(int x, int y){
+    public static FarmAnimal getAnimal(int x, int y) throws IllegalAccessException{
         for(int i = 0; i < animals.length(); i++){
             if (animals.get(i).GetX() == x && animals.get(i).GetY() == y){
                 return animals.get(i);
             }
         }
-        throw new Exception("No animal at the desired location");
+        throw new IllegalAccessException("No animal at the desired location");
     }
-
-    //TODO : Hilangkan, dengan implementasi singleton maka tidak diperlukan lagi
-
-    /**
-     * Method untuk mengakses instans truck jika berada di dekat posisi x,y.
-     * @param x posisi x akses, digunakan untuk menentukan apakah berada di dekat truck 
-     * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat truck
-     * @return objek truck pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
-     */
-    public static Truck getTruck(int x, int y){
-        if (isAdjacent(x,y,truck.GetX(),truck.GetY()))
-            return truck;
-        else
-            throw new Exception("Truck is not nearby");
-    }
-    /**
-     * Method untuk mengakses instans well jika berada di dekat posisi x,y.
-     * @param x posisi x akses, digunakan untuk menentukan apakah berada di dekat well 
-     * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat well
-     * @return objek well pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
-     */
-    public static Well getWell(int x, int y){
-        if (isAdjacent(x,y,well.GetX(),well.GetY()))
-            return well;
-        else
-            throw new Exception("Well is not nearby");
-    }
-    /**
-     * Method untuk mengakses instans mixer jika berada di dekat posisi x,y.
-     * @param x posisi x akses, digunakan untuk menentukan apakah berada di dekat mixer 
-     * @param y posisi y akses, digunakan untuk menentukan apakah berada di dekat mixer
-     * @return objek mixer pada jika berada di dekat x,y. throws exception jika tidak berada di dekat x,y
-     */
-    public static Mixer getMixer(int x, int y){
-        if (isAdjacent(x,y,mixer.GetX(),mixer.GetY()))
-            return mixer;
-        else
-            throw new Exception("Mixer is not nearby");
-    }
-    /**
-     * Method untuk mengakses instans player
-     * @return objek player
-     */
-    public static Player getPlayer(){
-        return player;
-    }
-
 }

@@ -54,7 +54,11 @@ public class Goat extends FarmAnimal
         */
         public void GetKilledProduct()
             {
-                Game.getPlayer().getInventory().add(new GoatMeat());
+                try{
+                    Player.getInstance().getInventory().add(new GoatMeat());
+                } catch (IllegalAccessException e) {
+                    //Do nothing
+                }
             }
 
         //! Implementasi dari fungsi getProduct()
@@ -65,7 +69,7 @@ public class Goat extends FarmAnimal
             {
                 if (availableProduct)
                     {
-                        Game.getPlayer().getInventory().add(new GoatMilk());
+                        Player.getInstance().getInventory().add(new GoatMilk());
                     }
                 else
                     {

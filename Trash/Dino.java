@@ -58,7 +58,7 @@ public class Dino extends FarmAnimal
             {
                 if (availableProduct)
                     {
-                        Game.getPlayer().getInventory().add(new DinoEgg());
+                        Player.getInstance().getInventory().add(new DinoEgg());
                     }
                 else
                     {
@@ -70,7 +70,7 @@ public class Dino extends FarmAnimal
         /*!
         Getter untuk mendapatkan product dari kelas Dino, akan menghasilkan throws error karena dino tidak bisa dibunuh
         */
-        public void GetKilledProduct()
+        public void GetKilledProduct() 
             {
                 throw new IllegalArgumentException("Can't be killed");
             }

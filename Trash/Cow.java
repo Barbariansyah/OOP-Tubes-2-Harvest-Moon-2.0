@@ -57,7 +57,7 @@ public class Cow extends FarmAnimal
             {
                 if (availableProduct)
                     {
-                        Game.getPlayer().getInventory().add(new CowMilk());
+                        Player.getInstance().getInventory().add(new CowMilk());
                     }
                 else
                     {
@@ -69,8 +69,12 @@ public class Cow extends FarmAnimal
         /*!
         Getter untuk mendapatkan produk hasil kill dari kelas Cow, berupa CowMeat
         */
-        public void GetKilledProduct()
+        public void GetKilledProduct() 
             {
-                Game.getPlayer().getInventory().add(new CowMeat());
+                try{
+                    Player.getInstance().getInventory().add(new CowMeat());
+                } catch (IllegalAccessException e) {
+                    //Do nothing
+                }
             }
     }

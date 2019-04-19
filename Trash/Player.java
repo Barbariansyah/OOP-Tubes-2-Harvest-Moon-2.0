@@ -32,6 +32,7 @@ public class Player extends Entity implements LiveEntity, Renderable
                 this.name = "Player";
                 this.water_container = 0;
                 this.money = 0;
+                this.inventory = new LinkedList<Product>();
                 pos_x = 0;
                 pos_y = 0;
             }
@@ -48,6 +49,7 @@ public class Player extends Entity implements LiveEntity, Renderable
                 this.name = _name;
                 this.water_container = _water_container;
                 this.money = _money;
+                this.inventory = new LinkedList<Product>();
                 pos_x = x;
                 pos_y = y;
             }
@@ -285,7 +287,7 @@ public class Player extends Entity implements LiveEntity, Renderable
                 }
 
                 try {
-                    Truck t = Game.getTruck(pos_x, pos_y);
+                    Truck t = Truck.getInstance();
                     t.setAwayCounter(5);
                     double selling = 0;
                     for (int i = 0 ; i < inventory.length() ; i++)
@@ -301,7 +303,7 @@ public class Player extends Entity implements LiveEntity, Renderable
                 }
 
                 try {
-                    Well w = Game.getWell(pos_x, pos_y);
+                    Well w = Well.getInstance();
                     water_container = 5;
                     return;
                 } catch (Exception e) {
@@ -510,7 +512,7 @@ public class Player extends Entity implements LiveEntity, Renderable
             {
                 for (int i = 0 ; i < inventory.length() ;i++)
                     {
-                        System.out.println(inventory.get(i));
+                        System.out.println(inventory.get(i).getName());
                     }
             }
         

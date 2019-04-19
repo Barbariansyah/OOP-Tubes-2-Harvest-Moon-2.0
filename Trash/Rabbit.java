@@ -60,8 +60,12 @@ public class Rabbit extends FarmAnimal
         /*!
         Getter untuk mendapatkan produk hasil kill dari kelas Rabbit, berupa RabbitMeat
         */
-        public void GetKilledProduct()
+        public void GetKilledProduct() 
             {
-                Game.getPlayer().getInventory().add(new RabbitMeat());
+                try{
+                    Player.getInstance().getInventory().add(new RabbitMeat());
+                } catch (IllegalAccessException e) {
+                    //Do nothing
+                }
             }
     }

@@ -57,7 +57,7 @@ public class Duck extends FarmAnimal
             {
                 if (availableProduct)
                     {
-                        Game.getPlayer().getInventory().add(new DuckEgg());
+                        Player.getInstance().getInventory().add(new DuckEgg());
                     }
                 else
                     {
@@ -71,7 +71,11 @@ public class Duck extends FarmAnimal
         */
         public void GetKilledProduct()
             {
-
+                try{
+                    Player.getInstance().getInventory().add(new DuckMeat());
+                } catch (IllegalAccessException e) {
+                    //Do nothing
+                }
             }
 
     }

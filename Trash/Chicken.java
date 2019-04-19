@@ -56,7 +56,7 @@ public class Chicken extends FarmAnimal
             {
                 if (availableProduct)
                     {
-                        Game.getPlayer().getInventory().add(new ChickenEgg());
+                        Player.getInstance().getInventory().add(new ChickenEgg());
                     }
                 else
                     {
@@ -68,8 +68,12 @@ public class Chicken extends FarmAnimal
         /*!
         Getter untuk mendapatkan produk hasil kill dari kelas Chicken, berupa ChickenMeat
         */
-        public void GetKilledProduct()
+        public void GetKilledProduct() 
             {
-                Game.getPlayer().getInventory().add(new ChickenMeat());
+                try{
+                    Player.getInstance().getInventory().add(new ChickenMeat());
+                } catch (IllegalAccessException e) {
+                    //Do nothing
+                }
             }
     }

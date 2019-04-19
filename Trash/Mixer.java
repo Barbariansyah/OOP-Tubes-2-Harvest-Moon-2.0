@@ -18,6 +18,7 @@ public class Mixer extends Facility implements Renderable{
     public static void initialize(int _x, int _y){
         if (mixerInstance == null){
             mixerInstance = new Mixer(_x, _y);
+            Game.setEntity(_x, _y, mixerInstance);
         }
     }
 

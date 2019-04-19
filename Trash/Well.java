@@ -18,6 +18,7 @@ public class Well extends Facility implements Renderable{
     public static void initialize(int _x, int _y){
         if (wellInstance == null){
             wellInstance = new Well(_x, _y);
+            Game.setEntity(_x, _y, wellInstance);
         }
     }
 
