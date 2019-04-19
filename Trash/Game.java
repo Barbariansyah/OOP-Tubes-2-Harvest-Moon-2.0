@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.File;
 
 /**
  * Kelas Statik Game.
@@ -16,42 +17,45 @@ public class Game {
      * Menerima nama file untuk kemudian dibaca dan dimuat dalam struktur data game.
      * @param filename nama file eksternal untuk dibaca
      */
-    public static void initialize(String filename, int xsize, int ysize){
-        nBaris = xsize;
-        nKolom = ysize;
-
-        landmap = new Land[nBaris][nKolom];
-        entitymap = new Entity[nBaris][nKolom];
+    public static void initialize(String filename){
         animals = new LinkedList<FarmAnimal>();
-
+        
         BeefRolade.initRecipe();
         Pancake.initRecipe();
         GoatCheese.initRecipe();
         ChickenButterMilk.initRecipe();
 
-        //TODO : Implementasi di loadGame
-        Player.initialize("Test", 5, 0, 0, 0);
-        Truck.initialize(0,1);
-        Well.initialize(0,2);
-        Mixer.initialize(0,3);
+        if (filename == "none"){
+            //Default initializer
+            nBaris = 5; 
+            nKolom = 5;
+    
+            landmap = new Land[nBaris][nKolom];
+            entitymap = new Entity[nBaris][nKolom];
 
-        for (int i = 0; i < nBaris; i++) {
-            for (int j = 0; j < nKolom; j++) {
-                landmap[i][j] = new Grassland();
-                entitymap[i][j] = null;
+            Player.initialize("Default", 5, 0, 0, 0);
+            Truck.initialize(0,1);
+            Well.initialize(0,2);
+            Mixer.initialize(0,3);
+
+            for (int i = 0; i < nBaris; i++) {
+                for (int j = 0; j < nKolom; j++) {
+                    landmap[i][j] = new Grassland();
+                    entitymap[i][j] = null;
+                }
             }
+
+            try{
+                entitymap[0][0] = Player.getInstance();
+                entitymap[0][1] = Truck.getInstance();
+                entitymap[0][2] = Well.getInstance();
+                entitymap[0][3] = Mixer.getInstance();
+            }catch (Exception e){
+    
+            }
+        }else{
+            loadGame(filename);
         }
-
-        try{
-            entitymap[0][0] = Player.getInstance();
-            entitymap[0][1] = Truck.getInstance();
-            entitymap[0][2] = Well.getInstance();
-            entitymap[0][3] = Mixer.getInstance();
-        }catch (Exception e){
-
-        }
-
-        loadGame(filename);
     }
     /**
      * Method load game yang akan dipanggil oleh konstruktor.
@@ -59,7 +63,128 @@ public class Game {
      * @param filename nama file eksternal untuk dibaca
      */
     public static void loadGame(String filename){
-        // TODO
+        Scanner scanner;
+        File file = null;
+        try{
+            file = new File(filename);
+            scanner = new Scanner(file);
+        } catch (Exception e){
+            scanner = new Scanner(System.in);
+        }
+
+        //Reading map size
+        String cmd;
+        int xsize = 0;
+        int ysize = 0;
+        while (scanner.hasNextLine()){
+            xsize++;
+            cmd = scanner.nextLine();
+            if (ysize == 0){
+                ysize = cmd.length();
+            }
+        }
+
+        nBaris = xsize;
+        nKolom = ysize;
+        landmap = new Land[nBaris][nKolom];
+        entitymap = new Entity[nBaris][nKolom];
+
+        scanner.close();
+
+        try{
+            scanner = new Scanner(file);
+        } catch (Exception e){
+            scanner = new Scanner(System.in);
+        }
+
+        for (int i = 0; i < nBaris; i++) {
+            cmd = scanner.nextLine();
+            for (int j = 0; j < nKolom; j++) {
+                char chr = cmd.charAt(j);
+                if (chr == '-'){
+                    landmap[i][j] = new Grassland();
+                }
+                else if (chr == 'O'){
+                    landmap[i][j] = new Coop();
+                }
+                else if (chr == 'X'){
+                    landmap[i][j] = new Barn();
+                }
+                else if (chr == '#'){
+                    landmap[i][j] = new Grassland();
+                    landmap[i][j].growGrass();
+                }
+                else if (chr == '*'){
+                    landmap[i][j] = new Coop();
+                    landmap[i][j].growGrass();
+                }
+                else if (chr == '@'){
+                    landmap[i][j] = new Barn();
+                    landmap[i][j].growGrass();
+                }
+                else if (chr == 'P'){
+                    try {
+                        Player.initialize("Default", 5, 0, i, j);
+                        entitymap[i][j] = Player.getInstance();
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                    }
+                }
+                else if (chr == 'M'){
+                    try {
+                        Mixer.initialize(i,j);
+                        entitymap[i][j] = Mixer.getInstance();
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                    }
+                }
+                else if (chr == 'W'){
+                    try {
+                        Well.initialize(0,2);
+                        entitymap[i][j] = Well.getInstance();
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                    }
+                }
+                else if (chr == 'T'){
+                    try {
+                        Truck.initialize(i,j);
+                        entitymap[i][j] = Truck.getInstance();
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                    }
+                }
+                else if (chr == 'C'){
+                    animals.add(new Chicken(i,j));
+                    landmap[i][j] = new Coop();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }
+                else if (chr == 'S'){
+                    animals.add(new Cow(i,j));
+                    landmap[i][j] = new Grassland();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }
+                else if (chr =='U'){
+                    animals.add(new Dino(i,j));
+                    landmap[i][j] = new Coop();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }else if (chr == 'D'){
+                    animals.add(new Duck(i,j));
+                    landmap[i][j] = new Coop();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }else if (chr == 'G'){
+                    animals.add(new Goat(i,j));
+                    landmap[i][j] = new Grassland();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }else if (chr == 'R'){
+                    animals.add(new Rabbit(i,j));
+                    landmap[i][j] = new Barn();
+                    entitymap[i][j] = animals.get(animals.length()-1);
+                }
+            }
+        }
+
+        scanner.close();
     }
     /**
      * Method save game untuk menyimpan kondisi permainan ke file eksternal.

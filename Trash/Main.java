@@ -123,7 +123,7 @@ public class Main{
         // System.out.println("---END OF TEST---");
         
         try{
-            Game.initialize("tes.txt", 3, 4);
+            Game.initialize("tes.txt");
             Game.drawScreen();
             while (true){
                 Game.tick();
