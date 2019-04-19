@@ -16,7 +16,7 @@ public abstract class Entity implements Renderable
         Digunakan untuk mendapatkan atribut pos_x oleh objek lain
         @return X;
         */
-        public int GetX()
+        public int getX()
             {
                 return pos_x;
             }
@@ -26,15 +26,15 @@ public abstract class Entity implements Renderable
         Digunakan untuk mendapatkan atribut pos_y oleh objek lain
         @return Y;
         */
-        public int GetY()   
+        public int getY()   
             {
                 return pos_y;
             }
 
         /**
-         * Method Render()
+         * Method render()
          * Mengembalikan string dari objek tertentu
          * @return String sesuai objek
          */
-        public abstract String Render();
+        public abstract String render();
     }

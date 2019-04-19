@@ -1,7 +1,7 @@
 //! Kelas Goat
 /*!
   Sebuah kelas riil dari FarmAnimal, yaitu kelas goat
-  Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
+  Berisi sebuah konstruktor, implementasi fungsi render(), dan implementasi fungsi sounds()
 */
 public class Goat extends FarmAnimal
     {
@@ -21,17 +21,17 @@ public class Goat extends FarmAnimal
                 allowed_tiles = "Grassland";
             }
 
-        //! Implementasi dari fungsi Render()
+        //! Implementasi dari fungsi render()
         /*!
         Digunakan untuk menampilkan goat pada Map
         @return karakter serta kode warna yang sesuai dengan Goat.
         */
-        public String Render()
+        public String render()
             {
-                if(GetHungerCountdown() <= 0 && GetHungerCountdown() > -5){
+                if(getHungerCountdown() <= 0 && getHungerCountdown() > -5){
                     return "g";
                 }
-                else if (GetHungerCountdown() > 0){
+                else if (getHungerCountdown() > 0){
                     return "G";
                 }
                 else{
@@ -39,11 +39,11 @@ public class Goat extends FarmAnimal
                 }     
             }           
             
-        //! Implementasi dari fungsi Sounds()
+        //! Implementasi dari fungsi sounds()
         /*!
         Digunakan untuk mengeluarkan suara goat
         */
-        public void Sounds()
+        public void sounds()
             {
                 System.out.println("Baaaaaaaa :9");
             }
@@ -52,7 +52,7 @@ public class Goat extends FarmAnimal
         /*!
         Getter untuk mendapatkan produk hasil kill dari kelas Goat, berupa GoatMeat
         */
-        public void GetKilledProduct()
+        public void getKilledProduct()
             {
                 try{
                     Player.getInstance().getInventory().add(new GoatMeat());
@@ -65,7 +65,7 @@ public class Goat extends FarmAnimal
         /*!
         Getter untuk mendapatkan product dari kelas Goat, berupa GoatMilk
         */        
-        public void GetProduct() throws IllegalAccessException
+        public void getProduct() throws IllegalAccessException
             {
                 if (availableProduct)
                     {

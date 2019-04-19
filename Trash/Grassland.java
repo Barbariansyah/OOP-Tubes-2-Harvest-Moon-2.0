@@ -4,7 +4,7 @@ public class Grassland extends Land{
         type = "Grassland";
     }
 
-    public String Render(){
+    public String render(){
         if(isGrass()){
             return "#";
         }else{

@@ -3,9 +3,9 @@
     Kelas LiveEntity, merupakan interface
     untuk kelas entitas yang merupakan makhluk hidup.
    
-   Memiliki method yaitu Move() 
+   Memiliki method yaitumove() 
 */
 public interface LiveEntity
     {
-        public void Move(int dir);
+        public void move(int dir);
     }

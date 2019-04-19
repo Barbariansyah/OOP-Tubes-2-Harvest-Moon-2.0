@@ -1,7 +1,7 @@
 //! Kelas Dino
 /*!
   Sebuah kelas riil dari FarmAnimal, yaitu kelas dino
-  Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
+  Berisi sebuah konstruktor, implementasi fungsi render(), dan implementasi fungsi sounds()
 */
 public class Dino extends FarmAnimal
     {
@@ -22,17 +22,17 @@ public class Dino extends FarmAnimal
                 allowed_tiles = "Coop";
             }
 
-        //! Implementasi dari fungsi Render()
+        //! Implementasi dari fungsi render()
         /*!
         Digunakan untuk menampilkan Dino pada Map
         @return karakter serta kode warna yang sesuai dengan Dino.
         */
-        public String Render()
+        public String render()
             {
-                if(GetHungerCountdown() <= 0 && GetHungerCountdown() > -5){
+                if(getHungerCountdown() <= 0 && getHungerCountdown() > -5){
                     return "u";
                 }
-                else if (GetHungerCountdown() > 0){
+                else if (getHungerCountdown() > 0){
                     return "U";
                 }
                 else{
@@ -40,12 +40,12 @@ public class Dino extends FarmAnimal
                 }                
             }
 
-        //! Implementasi dari fungsi Sounds()
+        //! Implementasi dari fungsi sounds()
         /*!
         Digunakan untuk mengeluarkan suara dino
         TBD!
         */
-        public void Sounds()
+        public void sounds()
             {
                 System.out.println("Rawrrrr :<");
             }
@@ -54,7 +54,7 @@ public class Dino extends FarmAnimal
         /*!
         Getter untuk mendapatkan product dari kelas Dino, berupa DinoEgg
         */
-        public void GetProduct() throws IllegalAccessException
+        public void getProduct() throws IllegalAccessException
             {
                 if (availableProduct)
                     {
@@ -70,7 +70,7 @@ public class Dino extends FarmAnimal
         /*!
         Getter untuk mendapatkan product dari kelas Dino, akan menghasilkan throws error karena dino tidak bisa dibunuh
         */
-        public void GetKilledProduct() 
+        public void getKilledProduct() 
             {
                 throw new IllegalArgumentException("Can't be killed");
             }

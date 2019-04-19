@@ -18,5 +18,5 @@ public abstract class Land implements Renderable{
         return type;
     }
 
-    public abstract String Render();
+    public abstract String render();
 }

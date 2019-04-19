@@ -1,7 +1,7 @@
 //! Kelas Duck
 /*!
   Sebuah kelas riil dari FarmAnimal, yaitu kelas duck
-  Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
+  Berisi sebuah konstruktor, implementasi fungsi render(), dan implementasi fungsi sounds()
 */
 public class Duck extends FarmAnimal
     {
@@ -21,17 +21,17 @@ public class Duck extends FarmAnimal
                 allowed_tiles = "Coop";
             }
 
-        //! Implementasi dari fungsi Render()
+        //! Implementasi dari fungsi render()
         /*!
         Digunakan untuk menampilkan duck pada Map
         @return karakter serta kode warna yang sesuai dengan Duck.
         */
-        public String Render()
+        public String render()
             {
-                if(GetHungerCountdown() <= 0 && GetHungerCountdown() > -5){
+                if(getHungerCountdown() <= 0 && getHungerCountdown() > -5){
                     return "d";
                 }
-                else if (GetHungerCountdown() > 0){
+                else if (getHungerCountdown() > 0){
                     return "D";
                 }
                 else {
@@ -39,12 +39,12 @@ public class Duck extends FarmAnimal
                 }
             }
 
-        //! Implementasi dari fungsi Sounds()
+        //! Implementasi dari fungsi sounds()
         /*!
         Digunakan untuk mengeluarkan suara duck
         TBD!
         */
-        public void Sounds()
+        public void sounds()
             {
                 System.out.println("Wkwkwkwkwk :D");
             }
@@ -53,7 +53,7 @@ public class Duck extends FarmAnimal
         /*!
         Getter untuk mendapatkan product dari kelas Duck, berupa DuckEgg
         */
-        public void GetProduct() throws IllegalAccessException
+        public void getProduct() throws IllegalAccessException
             {
                 if (availableProduct)
                     {
@@ -69,7 +69,7 @@ public class Duck extends FarmAnimal
         /*!
         Getter untuk mendapatkan produk hasil kill dari kelas Duck, berupa DuckMeat
         */
-        public void GetKilledProduct()
+        public void getKilledProduct()
             {
                 try{
                     Player.getInstance().getInventory().add(new DuckMeat());

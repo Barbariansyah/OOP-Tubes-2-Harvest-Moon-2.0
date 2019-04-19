@@ -4,7 +4,7 @@ public class Coop extends Land{
         type = "Coop";
     }
 
-    public String Render(){
+    public String render(){
         if(isGrass()){
             return "*";
         }else{

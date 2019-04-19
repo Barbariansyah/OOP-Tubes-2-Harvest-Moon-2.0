@@ -2,9 +2,8 @@
 /*!
     Sebuah Kelas sebagai representasi binatang yang ada pada permainan
     Akan diinherit dengan semua animal yang ada di permainan
-    Berisi fungsi Eat(), pure virtual Sounds(), GetHungerCountdown(), dan IsProductAvailable()
+    Berisi fungsi eat(), pure virtual sounds(), getHungerCountdown(), dan IsProductAvailable()
 */
-import java.util.*;
 
 public abstract class FarmAnimal extends Entity implements LiveEntity
     {
@@ -19,28 +18,30 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
         /*!
         Digunakan untuk memakan grass yang ada pada cell
         */
-        public void Eat()
+        public void eat()
             {
-                if (hunger_countdown <= 0 )
+                Land land = Game.getLand(pos_x,pos_y);
+                if (hunger_countdown <= 0 && land.isGrass())
                     {
                         hunger_countdown = 5;
                         availableProduct = true;
+                        land.removeGrass();
                     }
             }
         
-        //! Abstract Method Sounds()
+        //! Abstract Method sounds()
         /*!
         Digunakan untuk menampilkan suara pada hewan
         Abstract karena akan diimplementasikan di kelas riil
         */
-        public abstract void Sounds();
+        public abstract void sounds();
 
-        //! Fungsi Getter GetHungerCountdown()
+        //! Fungsi Getter getHungerCountdown()
         /*!
         Getter untuk mendapatkan countdown lapar animal
         @return jumlah tick kelaparan, positif berarti kenyang, nol lapar, -5 mati
         */
-        public int GetHungerCountdown()
+        public int getHungerCountdown()
             {
                 return hunger_countdown;
             }        
@@ -49,16 +50,16 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
         /*!
         Fungsi untuk mengurangi hunger countdown
         */
-        public void ReduceHungerCountdown()
+        public void reduceHungerCountdown()
             {
-                hunger_countdown = hunger_countdown - 1;
+                hunger_countdown--;
             }        
         
         /**
         * Digunakan untuk berpindah secara random
         * @param dir arah pergerakan, 0 : UP , 1 : DOWN , 2 : LEFT , 3 : RIGHT
         */
-        public void Move(int dir)
+        public void move(int dir)
             {
                 Game.setEntity(pos_x,pos_y,null);
 
@@ -99,13 +100,13 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
         Getter untuk mendapatkan product dari hewan yang tidak dibunuh
         @return product dari tiap hewan
         */
-        public abstract void GetProduct() throws IllegalAccessException;
+        public abstract void getProduct() throws IllegalAccessException;
 
-        //! Fungsi Getter GetKilledProduct()
+        //! Fungsi Getter getKilledProduct()
         /*!
         Getter untuk mendapatkan product dari hewan yang dibunuh
         */
-        public abstract void GetKilledProduct();
+        public abstract void getKilledProduct();
 
         //! Fungsi setter SetKilled()
         /*!
@@ -114,8 +115,6 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
         public void SetKilled()
             {
                 hunger_countdown = -99;
-                Game.setEntity(pos_x,pos_y,null);
-                Game.removeAnimal(this);
             }
         
         //! Fungsi abstract render
@@ -123,5 +122,5 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
         Digunakan untuk mengeluarkan character pada map
         @return sesuai kelas masing-masing
         */
-        public abstract String Render();
+        public abstract String render();
     }

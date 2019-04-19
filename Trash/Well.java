@@ -22,7 +22,7 @@ public class Well extends Facility implements Renderable{
         }
     }
 
-    public String Render(){
+    public String render(){
         return "W";
     }
 }

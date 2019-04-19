@@ -24,7 +24,7 @@ public class Truck extends Facility implements Renderable{
         }
     }
 
-    public String Render(){
+    public String render(){
         return "T";
     }
 

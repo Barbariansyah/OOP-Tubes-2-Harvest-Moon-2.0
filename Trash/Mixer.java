@@ -22,7 +22,7 @@ public class Mixer extends Facility implements Renderable{
         }
     }
 
-    public String Render(){
+    public String render(){
         return "M";
     }
 }

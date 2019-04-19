@@ -37,7 +37,7 @@ public class Product{
      * Method ini mencetak atribut name dan price
      * Method ini mencetak produk yang tampilannya akan berbeda antara side product dengan farm product
      */
-    public void Print(){
+    public void print(){
         System.out.println("Name : "+name);
         System.out.println("Price : "+price);
     }

@@ -1,7 +1,7 @@
 //! Kelas Rabbit
 /*!
   Sebuah kelas riil dari FarmAnimal, yaitu kelas Rabbit
-  Berisi sebuah konstruktor, implementasi fungsi Render(), dan implementasi fungsi Sounds()
+  Berisi sebuah konstruktor, implementasi fungsi render(), dan implementasi fungsi sounds()
 */
 public class Rabbit extends FarmAnimal
     {
@@ -21,28 +21,28 @@ public class Rabbit extends FarmAnimal
                 allowed_tiles = "Barn";
             }
 
-        //! Implementasi dari fungsi Render()
+        //! Implementasi dari fungsi render()
         /*!
         Digunakan untuk menampilkan rabbit pada Map
         @return karakter serta kode warna yang sesuai dengan Player.
         */
-        public String Render()
+        public String render()
             {
-                if(GetHungerCountdown() <= 0 && GetHungerCountdown() > -5){
+                if(getHungerCountdown() <= 0 && getHungerCountdown() > -5){
                     return "r";
                 }
-                else if (GetHungerCountdown() > 0){
+                else if (getHungerCountdown() > 0){
                     return "R";
                 } else {
                     return null;
                 }
             }
 
-        //! Implementasi dari fungsi Sounds()
+        //! Implementasi dari fungsi sounds()
         /*!
         Digunakan untuk mengeluarkan suara rabbit
         */
-        public void Sounds()
+        public void sounds()
             {
                 System.out.println("Chill :3");
             }
@@ -51,7 +51,7 @@ public class Rabbit extends FarmAnimal
         /*!
         Getter untuk mendapatkan product dari kelas Rabbit, akan menghasilkan throws error karena rabbit tidak memiliki product
         */
-        public void GetProduct() throws IllegalAccessException
+        public void getProduct() throws IllegalAccessException
             {
                 throw new IllegalAccessException("Can't be interracted");
             }
@@ -60,7 +60,7 @@ public class Rabbit extends FarmAnimal
         /*!
         Getter untuk mendapatkan produk hasil kill dari kelas Rabbit, berupa RabbitMeat
         */
-        public void GetKilledProduct() 
+        public void getKilledProduct() 
             {
                 try{
                     Player.getInstance().getInventory().add(new RabbitMeat());

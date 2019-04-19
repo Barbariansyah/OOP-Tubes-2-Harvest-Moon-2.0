@@ -142,7 +142,7 @@ public class Player extends Entity implements LiveEntity
          * Implementasi fungsi render dari kelas renderer.
          * @return karakter serta kode warna yang sesuai dengan Player.
          */
-        public String Render()
+        public String render()
             {
                 return "P";
             }
@@ -151,7 +151,7 @@ public class Player extends Entity implements LiveEntity
         * Digunakan untuk berpindah secara random
         * @param dir arah pergerakan, 0 : UP , 1 : DOWN , 2 : LEFT , 3 : RIGHT
         */
-        public void Move(int dir)
+        public void move(int dir)
             {
                 Game.setEntity(pos_x,pos_y,null);
 
@@ -183,7 +183,7 @@ public class Player extends Entity implements LiveEntity
             {
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x+1, pos_y);
-                    fa.Sounds();
+                    fa.sounds();
                     return;
                 } catch (Exception e) {
 
@@ -191,7 +191,7 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y+1);
-                    fa.Sounds();
+                    fa.sounds();
                     return;
                 } catch (Exception e) {
                     
@@ -199,7 +199,7 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y-1);
-                    fa.Sounds();
+                    fa.sounds();
                     return;
                 } catch (Exception e) {
                     
@@ -207,7 +207,7 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x-1, pos_y);
-                    fa.Sounds();
+                    fa.sounds();
                     return;
                 } catch (Exception e) {
                     
@@ -228,7 +228,7 @@ public class Player extends Entity implements LiveEntity
                     FarmAnimal fa = Game.getAnimal(pos_x+1, pos_y);
                     if (inventory.length() < 7 )
                         {
-                            fa.GetProduct();
+                            fa.getProduct();
                         }
                     else
                         {
@@ -243,7 +243,7 @@ public class Player extends Entity implements LiveEntity
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y+1);
                     if (inventory.length() < 7 )
                         {
-                            fa.GetProduct();
+                            fa.getProduct();
                         }
                     else
                         {
@@ -258,7 +258,7 @@ public class Player extends Entity implements LiveEntity
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y-1);
                     if (inventory.length() < 7 )
                         {
-                            fa.GetProduct();
+                            fa.getProduct();
                         }
                     else
                         {
@@ -273,7 +273,7 @@ public class Player extends Entity implements LiveEntity
                     FarmAnimal fa = Game.getAnimal(pos_x-1, pos_y);
                     if (inventory.length() < 7 )
                         {
-                            fa.GetProduct();
+                            fa.getProduct();
                         }
                     else
                         {
@@ -287,7 +287,7 @@ public class Player extends Entity implements LiveEntity
                 try {
                     Truck t = Truck.getInstance();
                     try {
-                        if (Game.isAdjacent(pos_x, pos_y, t.GetX(), t.GetY()))  
+                        if (Game.isAdjacent(pos_x, pos_y, t.getX(), t.getY()))  
                             {
                                 t.setAwayCounter(5);
                                 double selling = 0;
@@ -303,7 +303,7 @@ public class Player extends Entity implements LiveEntity
                             throw new IllegalAccessException("Truck is not nearby");
                         }
                     } catch (Exception e) {
-                        //TODO: handle exception
+                        e.printStackTrace();
                     }
                     
                 } catch (Exception e) {
@@ -312,8 +312,15 @@ public class Player extends Entity implements LiveEntity
 
                 try {
                     Well w = Well.getInstance();
-                    water_container = 5;
-                    return;
+                    try {
+                        if (Game.isAdjacent(pos_x, pos_y, w.getX(), w.getY()))  
+                            {
+                                water_container = 5;
+                                return;
+                            }                       
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } catch (Exception e) {
                     notfound = true;
                 }
@@ -336,7 +343,7 @@ public class Player extends Entity implements LiveEntity
                     FarmAnimal fa = Game.getAnimal(pos_x+1, pos_y);
                     if (inventory.length() < inventory_size)
                         {
-                            fa.GetKilledProduct();
+                            fa.getKilledProduct();
                             fa.SetKilled();
                             return;
                         }
@@ -352,7 +359,7 @@ public class Player extends Entity implements LiveEntity
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y+1);
                     if (inventory.length() < inventory_size)
                         {
-                            fa.GetKilledProduct();
+                            fa.getKilledProduct();
                             fa.SetKilled();
                             return;
                         }
@@ -368,7 +375,7 @@ public class Player extends Entity implements LiveEntity
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y-1);
                     if (inventory.length() < inventory_size)
                         {
-                            fa.GetKilledProduct();
+                            fa.getKilledProduct();
                             fa.SetKilled();
                             return;
                         }
@@ -384,7 +391,7 @@ public class Player extends Entity implements LiveEntity
                     FarmAnimal fa = Game.getAnimal(pos_x-1, pos_y);
                     if (inventory.length() < inventory_size)
                         {
-                            fa.GetKilledProduct();
+                            fa.getKilledProduct();
                             fa.SetKilled();
                             return;
                         }
@@ -431,8 +438,8 @@ public class Player extends Entity implements LiveEntity
         public void Mix()
             {
                 try {
-                    int x_mixer = Mixer.getInstance().GetX();
-                    int y_mixer = Mixer.getInstance().GetY();
+                    int x_mixer = Mixer.getInstance().getX();
+                    int y_mixer = Mixer.getInstance().getY();
 
                     if (Game.isAdjacent(pos_x, pos_y, x_mixer, y_mixer))
                         {

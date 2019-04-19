@@ -129,7 +129,7 @@ public class Game {
                         landmap[i][j] = new Grassland();
                         entitymap[i][j] = Player.getInstance();
                     } catch (Exception e) {
-                        //TODO: handle exception
+                        e.printStackTrace();
                     }
                 }
                 else if (chr == 'M'){
@@ -138,7 +138,7 @@ public class Game {
                         landmap[i][j] = new Grassland();
                         entitymap[i][j] = Mixer.getInstance();
                     } catch (Exception e) {
-                        //TODO: handle exception
+                        e.printStackTrace();
                     }
                 }
                 else if (chr == 'W'){
@@ -147,7 +147,7 @@ public class Game {
                         landmap[i][j] = new Grassland();
                         entitymap[i][j] = Well.getInstance();
                     } catch (Exception e) {
-                        //TODO: handle exception
+                        e.printStackTrace();
                     }
                 }
                 else if (chr == 'T'){
@@ -156,7 +156,7 @@ public class Game {
                         landmap[i][j] = new Grassland();
                         entitymap[i][j] = Truck.getInstance();
                     } catch (Exception e) {
-                        //TODO: handle exception
+                        e.printStackTrace();
                     }
                 }
                 else if (chr == 'C'){
@@ -218,17 +218,17 @@ public class Game {
         try{
             player = Player.getInstance();
         } catch (IllegalAccessException e) {
-            // TODO
+            e.printStackTrace();
             throw new IllegalAccessException("Player belum diinisialisasi");
         }
         if (cmd.equals("MOVE UP")) {
-            player.Move(0);
+            player.move(0);
         }else if (cmd.equals("MOVE DOWN")) {
-            player.Move(1);
+            player.move(1);
         }else if (cmd.equals("MOVE LEFT")) {
-            player.Move(2);
+            player.move(2);
         }else if (cmd.equals("MOVE RIGHT")) {
-            player.Move(3);
+            player.move(3);
         }else if (cmd.equals("INTERACT")) {
             player.Interact();
         }else if (cmd.equals("GROW")) {
@@ -245,15 +245,15 @@ public class Game {
 
         //Menggerakan semua animal dan mengupdate kondisinya
         Random rand = new Random();
-        for(FarmAnimal animal : animals){
-            if (animal.GetHungerCountdown() <= -5){
-                animals.remove(animal);
-                setEntity(animal.GetX(),animal.GetY(),null);
-            }else{
-                int dir = rand.nextInt(4);
-                animal.ReduceHungerCountdown();
-                animal.Move(dir);
-                animal.Eat();
+        for(int i = animals.length() - 1; i >= 0; i--){
+            int dir = rand.nextInt(4);
+            FarmAnimal animal = animals.get(i);
+            animal.reduceHungerCountdown();
+            animal.move(dir);
+            animal.eat();
+            if (animal.getHungerCountdown() <= -5){
+                setEntity(animal.getX(),animal.getY(),null);
+                removeAnimal(animal);
             }
         }
 
@@ -272,10 +272,10 @@ public class Game {
     public static void drawScreen(){
         for(int i = 0; i < nBaris; i++){
             for(int j = 0; j < nKolom; j++){
-                if (entitymap[i][j] != null){
-                    System.out.print(entitymap[i][j].Render());
+                if (isValidEntity(i,j)){
+                    System.out.print(entitymap[i][j].render());
                 }else{
-                    System.out.print(landmap[i][j].Render());
+                    System.out.print(landmap[i][j].render());
                 }
                 System.out.print(" ");
             }
@@ -340,7 +340,7 @@ public class Game {
      */
     public static FarmAnimal getAnimal(int x, int y) throws IllegalAccessException{
         for(int i = 0; i < animals.length(); i++){
-            if (animals.get(i).GetX() == x && animals.get(i).GetY() == y){
+            if (animals.get(i).getX() == x && animals.get(i).getY() == y){
                 return animals.get(i);
             }
         }
