@@ -1,16 +1,16 @@
 package cell;
 
-public class Barn extends Land{
-    public Barn(){
+public class Coop extends Land{
+    public Coop(){
         grass = false;
-        type = "Barn";
+        type = "Coop";
     }
 
     public String render(){
         if(isGrass()){
-            return "@";
+            return "*";
         }else{
-            return "X";
+            return "O"; 
         }
     }
 }

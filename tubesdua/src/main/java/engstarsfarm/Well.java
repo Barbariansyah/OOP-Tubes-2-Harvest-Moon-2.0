@@ -17,7 +17,7 @@ public class Well extends Facility{
         }
     }
 
-    public static void initialize(int _x, int _y){
+    public static void initialize(int _x, int _y){ 
         if (wellInstance == null){
             wellInstance = new Well(_x, _y);
         }

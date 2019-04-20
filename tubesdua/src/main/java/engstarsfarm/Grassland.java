@@ -10,7 +10,7 @@ public class Grassland extends Land{
         if(isGrass()){
             return "#";
         }else{
-            return "-";
+            return "-"; 
         }
     }
 }

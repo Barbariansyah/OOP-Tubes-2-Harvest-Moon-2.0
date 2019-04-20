@@ -64,6 +64,8 @@ public class Game {
         }else{
             loadGame(filename);
         }
+
+        new GameWindow();
     }
     /**
      * Method load game yang akan dipanggil oleh konstruktor.

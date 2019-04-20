@@ -19,7 +19,7 @@ public class Truck extends Facility{
         }
     }
 
-    public static void initialize(int _x, int _y){
+    public static void initialize(int _x, int _y){ 
         if (truckInstance == null){
             truckInstance = new Truck(_x, _y);
         }

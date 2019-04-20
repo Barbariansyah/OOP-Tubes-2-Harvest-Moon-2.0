@@ -10,7 +10,7 @@ public abstract class Land implements Renderable{
     }
 
     public void removeGrass(){
-        grass = false;
+        grass = false; 
     }
 
     public boolean isGrass(){
