@@ -1,5 +1,7 @@
 engstarsfarm\FacilityTest.class
 engstarsfarm\AnimalTest.class
 engstarsfarm\LandTest.class
-engstarsfarm\AppTest.class
 engstarsfarm\PlayerTest.class
+engstarsfarm\FarmProductTest.class
+engstarsfarm\SideProductTest.class
+engstarsfarm\AppTest.class

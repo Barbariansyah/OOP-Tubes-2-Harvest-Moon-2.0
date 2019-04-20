@@ -13,6 +13,6 @@ public class SideProduct extends Product{
      */
     public SideProduct(double _price, String _name){
         super(_price, _name);
-    }
+    } 
     
 }

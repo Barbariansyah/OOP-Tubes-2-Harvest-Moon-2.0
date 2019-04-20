@@ -93,7 +93,7 @@ public class Player extends Entity implements LiveEntity
         /*!
         @param _name nama baru
         */
-        public void SetName(String _name)
+        public void setName(String _name)
             {
                 this.name = _name;
             }
@@ -102,7 +102,7 @@ public class Player extends Entity implements LiveEntity
         /*!
         @param _waterContainer isi container air
         */
-        public void SetWaterContainer(int _waterContainer)
+        public void setWaterContainer(int _waterContainer)
             {
                 this.water_container = _waterContainer;
             }
@@ -111,7 +111,7 @@ public class Player extends Entity implements LiveEntity
         /*!
         @param _money jumlah uang baru
         */
-        public void SetMoney(double _money)
+        public void setMoney(double _money)
             {
                 this.money = _money;
             }
@@ -120,7 +120,7 @@ public class Player extends Entity implements LiveEntity
         /*!
         @return nama player
         */
-        public String GetName()
+        public String getName()
             {
                 return name;
             }
@@ -129,7 +129,7 @@ public class Player extends Entity implements LiveEntity
         /*!
         @return isi water container
         */
-        public int GetWaterContainer()
+        public int getWaterContainer()
             {
                 return water_container;
             }
@@ -138,7 +138,7 @@ public class Player extends Entity implements LiveEntity
         /*!
         @return money
         */
-        public double GetMoney()
+        public double getMoney()
             {
                 return money;
             }
@@ -219,13 +219,13 @@ public class Player extends Entity implements LiveEntity
                 }
             }
 
-        //! Implementasi dari fungsi Interact()
+        //! Implementasi dari fungsi interact()
         /*!
         Fungsi interact(), digunakan untuk mengambil product dari Milk Producing Farm Animal dan Egg Producing Farm Animal
         ATAU 
         untuk melakukan interaksi dengan Facility
         */
-        public void Interact()
+        public void interact()
             {
                 boolean notfound = false;
 
@@ -345,11 +345,11 @@ public class Player extends Entity implements LiveEntity
                     }
             }
 
-        //! Implementasi dari fungsi Kill()
+        //! Implementasi dari fungsi kill()
         /*!
         Digunakan untuk membunuh animal dan mendapatkan dagingnya
         */
-        public void Kill()
+        public void kill()
             {
                 boolean notfound = false;
 
@@ -424,11 +424,11 @@ public class Player extends Entity implements LiveEntity
                 
             }
         
-        //! Implementasi dari fungsi Grow()
+        //! Implementasi dari fungsi grow()
         /*!
         Digunakan untuk menumbuhkan rumput pada cell
         */
-        public void Grow()
+        public void grow()
             {
                 if (water_container > 0 )
                     {
@@ -445,11 +445,11 @@ public class Player extends Entity implements LiveEntity
                     }
             }
 
-        //! Implementasi dari fungsi Mix()
+        //! Implementasi dari fungsi mix()
         /*!
         Digunakan untuk membuat side product dari farm product
         */
-        public void Mix()
+        public void mix()
             {
                 try {
                     int x_mixer = Mixer.getInstance().getX();
@@ -535,11 +535,11 @@ public class Player extends Entity implements LiveEntity
                 
             }
 
-        //! Implementasi dari fungsi PrintInventory()
+        //! Implementasi dari fungsi printInventory()
         /*!
         Digunakan untuk mengeluarkan daftar isi dari inventory yang dimiliki player
         */
-        public void PrintInventory()
+        public void printInventory()
             {
                 for (int i = 0 ; i < inventory.length() ;i++)
                     {
@@ -547,16 +547,16 @@ public class Player extends Entity implements LiveEntity
                     }
             }
         
-        //! Implementasi dari fungsi PrintStatus()
+        //! Implementasi dari fungsi printStatus()
         /*!
         Digunakan untuk mengeluarkan status dari player
         Berisi inventory, jumlah uang, dan jumlah water_container yang dimiliki
         */
-        public void PrintStatus()
+        public void printStatus()
             {
                 System.out.println("Water Container : " + water_container);
                 System.out.println("Money : " + money);
-                PrintInventory();
+                printInventory();
             }
 
         //! Implementasi dari fungsi getter GetInventory()

@@ -36,9 +36,9 @@ public class PlayerTest
         }catch (Exception e){
             e.printStackTrace();
         }
-        assertEquals(5,p.GetWaterContainer());
-        assertEquals("budi",p.GetName());
-        assertEquals(0.0,p.GetMoney(),0.0);
+        assertEquals(5,p.getWaterContainer());
+        assertEquals("budi",p.getName());
+        assertEquals(0.0,p.getMoney(),0.0);
         assertEquals("P",p.render());
     }
 }

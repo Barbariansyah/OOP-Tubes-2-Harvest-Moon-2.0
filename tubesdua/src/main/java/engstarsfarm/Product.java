@@ -32,7 +32,7 @@ public class Product{
      */
     public String getName(){
         return name;
-    }
+    } 
     /**
      * method Print.
      * Method ini mencetak atribut name dan price

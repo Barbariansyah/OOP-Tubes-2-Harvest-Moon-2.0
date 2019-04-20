@@ -13,6 +13,6 @@ public class FarmProduct extends Product{
      */
     public FarmProduct(double _price, String _name){
         super(_price, _name);
-    }
+    } 
 
 }

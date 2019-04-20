@@ -10,5 +10,5 @@ public class ChickenEgg extends FarmProduct{
      */
     public ChickenEgg(){
         super(2000, "Chicken Egg");
-    }
+    } 
 }

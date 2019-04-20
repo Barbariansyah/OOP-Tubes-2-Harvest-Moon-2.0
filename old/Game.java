@@ -62,17 +62,17 @@ public static class Game {
         if (cmd.equals("MOVE")) {
             player.Move();
         }else if (cmd.equals("INTERACT")) {
-            player.Interact();
+            player.interact();
         }else if (cmd.equals("GROW")) {
-            player.Grow();
+            player.grow();
         }else if (cmd.equals("TALK")) {
             player.Talk();
         }else if (cmd.equals("STATUS")) {
-            player.PrintStatus();
+            player.printStatus();
         }else if (cmd.equals("KILL")) {
-            player.Kill();
+            player.kill();
         }else if (cmd.equals("MIX")) {
-            player.Mix();
+            player.mix();
         }
 
         //Menggerakan semua animal dan mengupdate kondisinya
