@@ -313,7 +313,7 @@ public class Player extends Entity implements LiveEntity
                             throw new IllegalAccessException("Truck is not nearby");
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        
                     }
                     
                 } catch (Exception e) {
@@ -327,9 +327,13 @@ public class Player extends Entity implements LiveEntity
                             {
                                 water_container = 5;
                                 return;
-                            }                       
+                            }     
+                        else
+                            {
+                                throw new IllegalAccessException("Well is not nearby");
+                            }                   
                     } catch (Exception e) {
-                        e.printStackTrace();
+
                     }
                 } catch (Exception e) {
                     notfound = true;
