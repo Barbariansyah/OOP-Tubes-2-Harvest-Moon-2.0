@@ -3,10 +3,12 @@ package viewcontroller;
 import java.util.Scanner;
 import java.util.Random;
 import java.io.File;
+import java.awt.event.KeyEvent;
 
 import entity.*;
 import cell.*;
 import product.*;
+import view.GameWindow;
 import model.*;
 
 /**
@@ -19,6 +21,7 @@ public class Game {
     private static Entity[][] entitymap;        
     private static LinkedList<FarmAnimal> animals; 
     private static int nBaris,nKolom;
+    private static GameWindow gameWindow;
 
     /**
      * Initialize Game.
@@ -65,7 +68,7 @@ public class Game {
             loadGame(filename);
         }
 
-        new GameWindow();
+        gameWindow = new GameWindow();
     }
     /**
      * Method load game yang akan dipanggil oleh konstruktor.
@@ -212,17 +215,7 @@ public class Game {
      * Method ini akan memanggil semua method pada elemen map maupun entities yang
      * berhubungan dengan game tick.
      */
-    public static void tick() throws IllegalAccessException{
-        //Menerima input command
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("> ");
-        String cmd;
-        if (scanner.hasNextLine()){
-            cmd = scanner.nextLine();
-        }else{
-            cmd = "";
-        }
-
+    public static void tick(int keyCode) throws IllegalAccessException{
         Player player;
         try{
             player = Player.getInstance();
@@ -230,25 +223,25 @@ public class Game {
             e.printStackTrace();
             throw new IllegalAccessException("Player belum diinisialisasi");
         }
-        if (cmd.equals("MOVE UP")) {
+        if (keyCode == KeyEvent.VK_UP) {
             player.move(0);
-        }else if (cmd.equals("MOVE DOWN")) {
+        }else if (keyCode == KeyEvent.VK_DOWN) {
             player.move(1);
-        }else if (cmd.equals("MOVE LEFT")) {
+        }else if (keyCode == KeyEvent.VK_LEFT) {
             player.move(2);
-        }else if (cmd.equals("MOVE RIGHT")) {
+        }else if (keyCode == KeyEvent.VK_RIGHT) {
             player.move(3);
-        }else if (cmd.equals("INTERACT")) {
+        }else if (keyCode == KeyEvent.VK_I) {
             player.interact();
-        }else if (cmd.equals("GROW")) {
+        }else if (keyCode == KeyEvent.VK_G) {
             player.grow();
-        }else if (cmd.equals("TALK")) {
+        }else if (keyCode == KeyEvent.VK_T) {
             player.Talk();
-        }else if (cmd.equals("STATUS")) {
+        }else if (keyCode == KeyEvent.VK_ENTER) {
             player.printStatus();
-        }else if (cmd.equals("KILL")) {
+        }else if (keyCode == KeyEvent.VK_K) {
             player.kill();
-        }else if (cmd.equals("MIX")) {
+        }else if (keyCode == KeyEvent.VK_M) {
             player.mix();
         }
 
@@ -272,13 +265,14 @@ public class Game {
         } catch (IllegalAccessException e) {
             throw new IllegalAccessException("Truck belum diinisialisasi");
         }
+        printCLI();
     }   
     /**
      * Method draw screen mencetak kondisi permainan.
      * Method ini memanfaatkan method virtual render dari kelas renderer yang
      * diturunkan pada semua kelas selain produk.
      */
-    public static void drawScreen(){
+    public static void printCLI(){
         for(int i = 0; i < nBaris; i++){
             for(int j = 0; j < nKolom; j++){
                 if (isValidEntity(i,j)){
@@ -361,5 +355,19 @@ public class Game {
      */
     public static void removeAnimal(FarmAnimal animal) {
         animals.remove(animal);
+    }
+    
+    /**
+     * @return the nBaris
+     */
+    public static int getnBaris() {
+        return nBaris;
+    }
+
+    /**
+     * @return the nKolom
+     */
+    public static int getnKolom() {
+        return nKolom;
     }
 }

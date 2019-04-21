@@ -10,11 +10,6 @@ public class App{
     public static void main(String[] args){
         try{
             Game.initialize("map.dat");
-            Game.drawScreen();
-            while (true){
-                Game.tick();
-                Game.drawScreen();
-            }
         } catch (Exception e){
             System.out.println(e);
         }

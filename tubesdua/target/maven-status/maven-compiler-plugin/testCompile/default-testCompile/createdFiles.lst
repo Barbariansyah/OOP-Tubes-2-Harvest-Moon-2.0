@@ -1,7 +1,6 @@
-engstarsfarm\FacilityTest.class
-engstarsfarm\AnimalTest.class
-engstarsfarm\LandTest.class
-engstarsfarm\PlayerTest.class
-engstarsfarm\FarmProductTest.class
-engstarsfarm\SideProductTest.class
-engstarsfarm\AppTest.class
+engstarsfarm/PlayerTest.class
+engstarsfarm/FacilityTest.class
+engstarsfarm/LandTest.class
+engstarsfarm/SideProductTest.class
+engstarsfarm/AnimalTest.class
+engstarsfarm/FarmProductTest.class
