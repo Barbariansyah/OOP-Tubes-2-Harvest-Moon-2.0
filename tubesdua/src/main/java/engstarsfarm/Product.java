@@ -4,7 +4,7 @@ package model;
  * Base class Product.
  * Memiliki atribut price dan name yang dimiliki semua product turunan
  */
-public class Product{
+public class Product implements Comparable<Product>{
     protected double price;
     protected String name;
 
@@ -62,5 +62,21 @@ public class Product{
         }
 
         return true;
+    }
+    /**
+     * Implementasi method compareTo
+     * Digunakan untuk membandingkan product this dengan p
+     * @return integer kesamaan product (sama dengan, lebih besar, lebih kecil)
+     */
+    public int compareTo(Product p){
+        if(price > p.price){
+            return 1;
+        }
+        else if(price < p.price){
+            return -1;
+        }
+        else{
+            return name.compareTo(p.name);
+        }
     }
 }
