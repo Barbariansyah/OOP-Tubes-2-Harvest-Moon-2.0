@@ -6,7 +6,6 @@
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/product/Pancake.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/entity/Mixer.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/viewcontroller/Game.java
-/home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/engstarsfarm/FarmAnimal.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/entity/Rabbit.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/cell/Coop.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/cell/Land.java
@@ -25,6 +24,7 @@
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/cell/Barn.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/view/Renderable.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/engstarsfarm/App.java
+/home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/entity/FarmAnimal.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/product/FarmProduct.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/product/ChickenEgg.java
 /home/wirasuta/Documents/kuliah/oop/tubes_Java/src/main/java/model/LinkedList.java
