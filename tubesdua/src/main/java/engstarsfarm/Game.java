@@ -1,9 +1,11 @@
 package viewcontroller;
 
 import java.util.Scanner;
+import java.util.Queue;
 import java.util.Random;
 import java.io.File;
 import java.awt.event.KeyEvent;
+import java.util.Vector;
 
 import entity.*;
 import cell.*;
@@ -19,7 +21,7 @@ import model.*;
 public class Game {
     private static Land[][] landmap;            
     private static Entity[][] entitymap;        
-    private static LinkedList<FarmAnimal> animals; 
+    private static Vector<FarmAnimal> animals; 
     private static int nBaris,nKolom;
     private static GameWindow gameWindow;
 
@@ -29,7 +31,7 @@ public class Game {
      * @param filename nama file eksternal untuk dibaca
      */
     public static void initialize(String filename){
-        animals = new LinkedList<FarmAnimal>();
+        animals = new Vector<FarmAnimal>();
         
         BeefRolade.initRecipe();
         Pancake.initRecipe();
@@ -174,29 +176,29 @@ public class Game {
                 else if (chr == 'C'){
                     animals.add(new Chicken(i,j));
                     landmap[i][j] = new Coop();
-                    entitymap[i][j] = animals.get(animals.length()-1);
+                    entitymap[i][j] = animals.get(animals.size()-1);
                 }
                 else if (chr == 'S'){
                     animals.add(new Cow(i,j));
                     landmap[i][j] = new Grassland();
-                    entitymap[i][j] = animals.get(animals.length()-1);
+                    entitymap[i][j] = animals.get(animals.size()-1);
                 }
                 else if (chr =='U'){
                     animals.add(new Dino(i,j));
                     landmap[i][j] = new Coop();
-                    entitymap[i][j] = animals.get(animals.length()-1);
+                    entitymap[i][j] = animals.get(animals.size()-1);
                 }else if (chr == 'D'){
                     animals.add(new Duck(i,j));
                     landmap[i][j] = new Coop();
-                    entitymap[i][j] = animals.get(animals.length()-1);
+                    entitymap[i][j] = animals.get(animals.size()-1);
                 }else if (chr == 'G'){
                     animals.add(new Goat(i,j));
                     landmap[i][j] = new Grassland();
-                    entitymap[i][j] = animals.get(animals.length()-1);
+                    entitymap[i][j] = animals.get(animals.size()-1);
                 }else if (chr == 'R'){
                     animals.add(new Rabbit(i,j));
                     landmap[i][j] = new Barn();
-                    entitymap[i][j] = animals.get(animals.length()-1);
+                    entitymap[i][j] = animals.get(animals.size()-1);
                 }
             }
         }
@@ -247,7 +249,7 @@ public class Game {
 
         //Menggerakan semua animal dan mengupdate kondisinya
         Random rand = new Random();
-        for(int i = animals.length() - 1; i >= 0; i--){
+        for(int i = animals.size() - 1; i >= 0; i--){
             int dir = rand.nextInt(4);
             FarmAnimal animal = animals.get(i);
             animal.reduceHungerCountdown();
@@ -342,7 +344,7 @@ public class Game {
      * @return objek farmanimal pada posisi x, y. Null jika tidak ada
      */
     public static FarmAnimal getAnimal(int x, int y) throws IllegalAccessException{
-        for(int i = 0; i < animals.length(); i++){
+        for(int i = 0; i < animals.size(); i++){
             if (animals.get(i).getX() == x && animals.get(i).getY() == y){
                 return animals.get(i);
             }
