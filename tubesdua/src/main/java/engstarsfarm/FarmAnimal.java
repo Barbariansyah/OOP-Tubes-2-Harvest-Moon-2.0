@@ -40,7 +40,7 @@ public abstract class FarmAnimal extends Entity implements LiveEntity
         Digunakan untuk menampilkan suara pada hewan
         Abstract karena akan diimplementasikan di kelas riil
         */
-        public abstract void sounds();
+        public abstract String sounds();
 
         //! Fungsi Getter getHungerCountdown()
         /*!

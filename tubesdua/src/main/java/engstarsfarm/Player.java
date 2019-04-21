@@ -180,43 +180,40 @@ public class Player extends Entity implements LiveEntity
                 Game.setEntity(pos_x,pos_y,player_instance);
             }
 
-        //! Implementasi dari fungsi Talk()
+        //! Implementasi dari fungsi talk()
         /*!
         Digunakan untuk melakukan interaksi dengan animal
         */
-        public void Talk()
+        public String talk()
             {
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x+1, pos_y);
-                    fa.sounds();
-                    return;
+                    return fa.sounds();
                 } catch (Exception e) {
 
                 }
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y+1);
-                    fa.sounds();
-                    return;
+                    return fa.sounds();
                 } catch (Exception e) {
                     
                 }
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x, pos_y-1);
-                    fa.sounds();
-                    return;
+                    return fa.sounds();
                 } catch (Exception e) {
                     
                 }
 
                 try {
                     FarmAnimal fa = Game.getAnimal(pos_x-1, pos_y);
-                    fa.sounds();
-                    return;
+                    return fa.sounds();
                 } catch (Exception e) {
                     
                 }
+                return "";
             }
 
         //! Implementasi dari fungsi interact()

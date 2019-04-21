@@ -48,9 +48,8 @@ public class Chicken extends FarmAnimal
         /*!
         Digunakan untuk mengeluarkan suara chicken
         */
-        public void sounds()
-            {
-                System.out.println("Kukuruyukkkk :v");
+        public String sounds(){
+        return ("Kukuruyukkkk :v");
             }
 
         //! Implementasi dari fungsi getProduct()

@@ -34,7 +34,7 @@ public class Cow extends FarmAnimal
         public String render()
             {
                 if(getHungerCountdown() <= 0 && getHungerCountdown() > -5){
-                    return "ċ";
+                    return "s";
                 }
                 else if (getHungerCountdown() > 0){
                     return "S";
@@ -49,9 +49,8 @@ public class Cow extends FarmAnimal
         Digunakan untuk mengeluarkan suara cow
         TBD!
         */
-        public void sounds()
-            {
-                System.out.println("Moooooo :o");
+        public String sounds(){
+        return ("Moooooo :o");
             }
 
         //! Implementasi dari fungsi getProduct()

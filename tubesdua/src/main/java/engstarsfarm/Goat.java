@@ -48,9 +48,8 @@ public class Goat extends FarmAnimal
         /*!
         Digunakan untuk mengeluarkan suara goat
         */
-        public void sounds()
-            {
-                System.out.println("Baaaaaaaa :9");
+        public String sounds(){
+        return ("Baaaaaaaa :9");
             }
  
         //! Implementasi dari fungsi getKilledProduct()

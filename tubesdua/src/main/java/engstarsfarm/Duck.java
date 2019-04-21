@@ -49,9 +49,8 @@ public class Duck extends FarmAnimal
         Digunakan untuk mengeluarkan suara duck
         TBD!
         */
-        public void sounds()
-            {
-                System.out.println("Wkwkwkwkwk :D");
+        public String sounds(){
+            return ("Wkwkwkwkwk :D");
             }
 
         //! Implementasi dari fungsi getProduct()

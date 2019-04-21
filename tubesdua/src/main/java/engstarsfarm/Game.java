@@ -37,6 +37,8 @@ public class Game {
         Pancake.initRecipe();
         GoatCheese.initRecipe();
         ChickenButterMilk.initRecipe();
+        GameWindow.initializeEntitySprite();
+        GameWindow.initializeLandSprite();
 
         if (filename == "none"){
             //Default initializer
@@ -238,7 +240,9 @@ public class Game {
         }else if (keyCode == KeyEvent.VK_G) {
             player.grow();
         }else if (keyCode == KeyEvent.VK_T) {
-            player.Talk();
+            String sound = player.talk();
+            System.out.println(sound);
+            gameWindow.setAnimalchat(sound);
         }else if (keyCode == KeyEvent.VK_ENTER) {
             player.printStatus();
         }else if (keyCode == KeyEvent.VK_K) {
@@ -371,5 +375,12 @@ public class Game {
      */
     public static int getnKolom() {
         return nKolom;
+    }
+
+    /**
+     * @return the animals
+     */
+    public static Vector<FarmAnimal> getAnimals() {
+        return animals;
     }
 }

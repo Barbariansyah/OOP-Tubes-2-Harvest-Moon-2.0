@@ -117,7 +117,7 @@ public class AnimalTest
         assertEquals(0, ra.getHungerCountdown());
 
         assertEquals("c", ci.render());
-        assertEquals("ċ", co.render());
+        assertEquals("s", co.render());
         assertEquals("u", di.render());
         assertEquals("d", du.render());
         assertEquals("g", go.render());

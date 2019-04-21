@@ -49,9 +49,8 @@ public class Dino extends FarmAnimal
         Digunakan untuk mengeluarkan suara dino
         TBD!
         */
-        public void sounds()
-            {
-                System.out.println("Rawrrrr :<");
+        public String sounds(){
+        return ("Rawrrrr :<");
             }
 
         //! Implementasi dari fungsi getProduct()

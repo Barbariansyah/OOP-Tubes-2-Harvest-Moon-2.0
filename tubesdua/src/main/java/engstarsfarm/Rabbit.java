@@ -46,9 +46,8 @@ public class Rabbit extends FarmAnimal
         /*!
         Digunakan untuk mengeluarkan suara rabbit
         */
-        public void sounds()
-            {
-                System.out.println("Chill :3");
+        public String sounds(){
+        return ("Chill :3");
             }
         
         //! Implementasi dari fungsi getProduct()

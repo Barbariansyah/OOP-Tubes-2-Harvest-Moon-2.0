@@ -9,7 +9,7 @@ import product.ChickenEgg;
 public class App{
     public static void main(String[] args){
         try{
-            Game.initialize("map.dat");
+            Game.initialize("map/map.dat");
         } catch (Exception e){
             System.out.println(e);
         }
